@@ -1,0 +1,1260 @@
+<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Programmieren Dokumentation]]></title><description><![CDATA[Obsidian digital garden]]></description><link>http://github.com/dylang/node-rss</link><image><url>lib/media/favicon.png</url><title>Programmieren Dokumentation</title><link></link></image><generator>Webpage HTML Export plugin for Obsidian</generator><lastBuildDate>Mon, 04 Nov 2024 08:29:37 GMT</lastBuildDate><atom:link href="lib/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Mon, 04 Nov 2024 08:29:31 GMT</pubDate><ttl>60</ttl><dc:creator></dc:creator><item><title><![CDATA[Tutorium Programmieren (Prof. Dr. Ralf Gerlich)]]></title><description><![CDATA[ 
+ <br><br><br><br>Wir repräsentieren Vektoren im mehrdimensionalen Raum als Tupel. So können wir zum Beispiel (1.0, 2.5, 3.0) als dreidimensionalen Vektor interpretieren.<br>Implementieren Sie die folgenden Vektorfunktionen:<br>
+<br>vektor_summe: vektor_summe(a,b) soll die Summe der Vektoren a und b zurückliefern
+<br>skalar_produkt: skalar_produkt(a,b) soll das Skalarprodukt der Vektoren a und b zurückliefern
+<br>skaliere: skaliere(k, a) soll den Vektor a skaliert um den Faktor k zurückgeben
+<br>Zur Erinnerung:<br>
+<br>Die Summe von Vektoren ist ein Vektor, dessen Elemente die Summe der einzelnen Elemente sind (z.B. (ax, ay, az)+(bx, by, bz)=(ax+bx, ay+by, az+bz).
+<br>Das Skalarprodukt zweier Vektoren ist die Summe der paarweisen Produkte der Elemente (z.B. (ax, ay) * (bx, by) = ax*bx + ay*by.
+<br>Ein Vektor wird um den Faktor k skaliert, indem seine Elemente mit k multipliziert werden.
+<br>def vektor_summe(a, b):
+    out = []
+    for i in range(0, len(a), 1):
+        out.append(a[i]+b[i])
+Copy<br>def skalar_produkt(a, b):
+    out = []
+    for i in range(0, len(a), 1):
+        out.append(a[i]*b[i])
+Copy<br>def skaliere(k, a):
+    out = []
+    for i in range(0, len(a), 1):
+        out.append(a[i]*k)
+Copy<br><br>Im Folgenden wird Ihnen der Code einiger Funktionen präsentiert.<br>
+Finden Sie heraus, was die Funktion tut, und beschreiben Sie dies mit Ihren eigenen(!) Worten.<br><br>def fn_a(x):
+    result = x[0]
+    for i in x[1:]:
+        if i &gt; result:
+            result = i
+    return result
+
+Copy<br>Welche Aufgabe erfüllt diese Funktion?<br>fn_a gibt aus x das Element mit dem größten Wert zurück<br><br>def fn_b(liste):
+    x = 0
+    for num in liste:
+        x += num
+    return x / len(liste)
+Copy<br>Welche Aufgabe erfüllt diese Funktion?<br>
+fn_b gibt den Durchschnittswert aller Elemente aus liste zurück<br><br>def fn_c(s):
+    return s[::-1]
+Copy<br>Welche Aufgabe erfüllt diese Funktion?<br>
+fn_c kehrt die Liste s um<br><br>def fn_d(l):
+    liste = []
+    for i in range(len(l)):
+        if i % 2 == 0:
+            liste.append(l[i])
+    return liste
+Copy<br>Welche Aufgabe erfüllt diese Funktion?<br>
+fn_d gibt eine Liste mit allen geraden Zahlen aus l zurück<br><br>def fn_e(s, t):
+    u = ""
+    for char in s:
+        if char in t:
+            u = u + char
+    return u
+Copy<br>Welche Aufgabe erfüllt diese Funktion?<br>
+fn_e gibt einen String mit allein den Buchstaben zurück, die sich sowohl in s als auch in t befinden. Duplikate sind enthalten.<br><br>Viele Institutionen haben heutzutage Richtlinien für die Auswahl von Passwörtern.<br>Implementieren Sie die Funktion valid_password. Der Rückgabewert von valid_password(s) soll genau dann True sein, wenn alle der folgenden Bedingungen erfüllt sind:<br>
+<br>Das Passwort besteht aus mindestens 8 Zeichen.
+<br>Es enthält mindestens einen Großbuchstaben.
+<br>Es enthält mindestens einen Kleinbuchstaben.
+<br>Es enthält mindestens eine Ziffer.
+<br>Es enthält mindestens eines der Zeichen +, -, *, !, $.
+<br>Ist eine der Bedingungen nicht erfüllt, soll die Funktion False zurückgeben.<br>Prüfen Sie Ihre Funktion mit dem unten angegebenen Code.<br>def valid_password(s):
+    # mindestens 8 Zeichen
+    if not (len(s) &gt;= 8):
+        return False
+
+    # mindestens ein Großbuchstabe und Kleinbuchstabe
+    contains_cl = False
+    contains_lcl = False
+    contains_digit = False
+    contains_special = False
+    for i in s:
+        if i.islower():
+            contains_lcl = True
+            continue
+        if i.isupper():
+            contains_cl = True
+            continue
+        if i.isdigit():
+            contains_digit = True
+            continue
+        if (i == "+") or (i == "-") or (i == "*") or (i == "!") or (i == "$"):
+            contains_special == True
+            continue
+    if (not contains_cl) or (not contains_lcl) or (not contains_digit) or (not contains_special) :
+        return False
+    return True
+
+from getpass import getpass
+password = getpass()
+if valid_password(password):
+    print("Dies ist ein zulässiges Passwort")
+else:
+    print("Dies ist ein unzulässiges Passwort")
+Copy<br><br>Bücher und andere Waren werden häufig mit Artikelnummern ausgezeichnet. Häufig werden dafür die Systeme ISBN (International Standard Book Number) oder EAN (European Article Number) verwendet.<br>Die Spezialformen EAN-13 und ISBN-13 bestehen jeweils aus 13 Ziffern, wobei nicht alle dieser Ziffern frei wählbar sind. Vielmehr gibt es einen Test, mit dem sich prüfen lässt, ob eine bestimmte Ziffernfolge eine valide EAN-13 oder ISBN-13 ist:<br>
+<br>Multiplizieren Sie jede Ziffer der Nummer abwechselnd mit 1 und 3, beginnend mit 1 für die erste Ziffer.
+<br>Addieren Sie alle Ergebnisse dieser Multiplikationen.
+<br>Wenn die resultierende Summe durch 10 teilbar ist, dann ist die Nummer gültig. Andernfalls ist sie ungültig.
+<br>Implementieren Sie eine Funktion validate_code(code), die einen String code mit genau 13 Ziffern nimmt und prüft, ob es sich um eine gültige ISBN-13 oder EAN-13 Nummer handelt. Die Funktion soll True zurückgeben, wenn die Nummer gültig ist, und False, wenn sie ungültig ist.<br>Testen Sie die Funktion mit einer ISBN-13 oder einer EAN-13 eines Buchs oder Artikels in Ihrem Umfeld (z.B. Ihrer Trinkflasche). Modifizieren Sie eine Ziffer des Codes und prüfen Sie, ob der so veränderte Code als invalide erkannt wird.<br><br>Verwenden Sie eine for-Schleife, um über die Ziffern des Codes zu iterieren, und bedenken Sie, dass Sie Ziffern eines Strings direkt in Integer umwandeln können, um die Berechnungen durchzuführen.<br>def validate_code(code):
+    code = int(code)
+    out = []
+    for i in range(0, 13, 1):
+        if i % 2 == 0:
+            out.append(code[i] * 3)
+            continue
+        out.append(code[i])
+    x = 0
+    for i in out:
+        x += i
+    if x % 10 == 0:
+        return True
+    return False
+
+code = input("Geben Sie einen EAN-13- oder ISBN-13-Code ein:")
+if validate_code(code):
+    print("Dieser Code ist valide")
+else:
+    print("Dieser Code ist nicht valide")
+Copy]]></description><link>aufgabenblatt03/aufgabenblatt03.html</link><guid isPermaLink="false">Aufgabenblatt03/Aufgabenblatt03.md</guid><pubDate>Mon, 04 Nov 2024 07:10:13 GMT</pubDate></item><item><title><![CDATA[Tutorium Programmieren (Prof. Dr. Ralf Gerlich)]]></title><description><![CDATA[ 
+ <br><br><br><br>Leonardo da Pisa (Beiname: "figlio de Bonacci", "Sohn des Bonacci") untersuchte im dreizehnten Jahrhundert das Wachstum einer Kaninchenpopulation.<br>
+Das Ergebnis war die sogenannte <a data-tooltip-position="top" aria-label="https://de.wikipedia.org/wiki/Fibonacci-Folge" rel="noopener nofollow" class="external-link" href="https://de.wikipedia.org/wiki/Fibonacci-Folge" target="_blank">Fibonacci-Folge</a>: 1, 1, 2, 3, 5, 8, 13, ...<br>Die Folge erhält man, indem man die ersten zwei Elemente der Folge auf 1 setzt und die jeweils nachfolgenden Elemente als die Summe Ihrer zwei Vorgänger berechnet: 1, 1, 1+1=2, 1+2=3, 2+3=5, 3+5=8, 5+8=13, ...<br>Das k-te-Element der Folge gibt an, wie Kaninchenpaare im Monat k vorhanden sind, wenn jedes Kaninchenpaar jeden Monat ein weiteres Kaninchenpaar zur Welt bringt, aber die Kaninchen erst nach zwei Monaten geschlechtsreif sind.<br>Unabhängig davon, wie realistisch diese Annahmen sind, hat die Folge eine interessante mathematische Eigenschaft: Der Quotient aus einem Element der Folge und seinem Vorgänger strebt gegen den sogenannten <a data-tooltip-position="top" aria-label="https://de.wikipedia.org/wiki/Goldener_Schnitt" rel="noopener nofollow" class="external-link" href="https://de.wikipedia.org/wiki/Goldener_Schnitt" target="_blank">Goldenen Schnitt</a>: .<br>Überzeugen Sie sich davon, indem Sie die ersten 20 Werte der Fibonacci-Folge berechnen und ausgeben. Geben Sie zusätzlich jeweils den Quotienten der jeweils zwei letzten Wert aus.<br>Die Ausgabe sollte so aussehen:<br>f_3 = 2 2.000000000000000
+f_4 = 3 1.500000000000000
+f_5 = 5 1.666666666666667
+f_6 = 8 1.600000000000000
+f_7 = 13 1.625000000000000
+f_8 = 21 1.615384615384615
+f_9 = 34 1.619047619047619
+f_10 = 55 1.617647058823529
+f_11 = 89 1.618181818181818
+f_12 = 144 1.617977528089888
+f_13 = 233 1.618055555555556
+f_14 = 377 1.618025751072961
+f_15 = 610 1.618037135278515
+f_16 = 987 1.618032786885246
+f_17 = 1597 1.618034447821682
+f_18 = 2584 1.618033813400125
+f_19 = 4181 1.618034055727554
+f_20 = 6765 1.618033963166706
+Copy<br>def fibonacci(x):
+    if (x == 1) or (x == 2):
+        return 1
+    return fibonacci(x - 1) + fibonacci(x - 2)
+
+
+for i in range(3, 24, 1):
+    print(
+        "f_"
+        + str(i)
+        + " = "
+        + str(fibonacci(i))
+        + " "
+        + str(fibonacci(i) / fibonacci(i - 1))
+    )
+
+Copy<br><br>Bubble-Sort ist ein Sortieralgorithmus, bei dem die Einträge in einer Liste so lange paarweise vertauscht werden, bis die Reihenfolge korrekt ist. Stellt man sich die zu sortierende Liste als Säule vor, so kann man sich vorstellen, dass die größten/kleinsten Einträge Schritt für Schritt wie eine Luftblase (engl. "bubble") nach oben steigen.<br>
+<br>Beim Bubble-Sort wird die zu sortierende Liste wiederholt von vorne nach hinten durchlaufen.
+<br>Ist ein Element der Liste größer als sein Nachfolger, so wird dass Element mit seinem Nachfolger vertauscht.
+<br>Dies wird so lange wiederholt, bis kein Tausch mehr erforderlich ist.
+<br>Aufgrund seiner Eigenschaften lässt sich Bubble-Sort als sogenannter In-Place-Sortieralgorithmus implementieren, da statt der Erstellung einer komplett neuen Liste auch die bestehende Liste einfach modifiziert werden kann. Das Ergebnis wird also an der Stelle gespeichert, an dem auch die Eingabe lag ("in place").<br>Implementieren Sie den Bubble-Sort in Python. Der folgende Code kann dafür verwendet werden, eine zufällige Folge von Zahlen zwischen 0 und 999 zu erstellen:<br>import random
+
+
+def bubble_sort(x):
+    while True:
+        possibly_sorted = True
+        for i in range(0, len(x), 1):
+            temp = 0
+            if i &lt; len(x) - 1:
+                if x[i] &gt; x[i + 1]:
+                    possibly_sorted = False
+                    temp = x[i]
+                    x[i] = x[i + 1]
+                    x[i + 1] = temp
+        if possibly_sorted:
+            return x
+
+
+random.seed()
+numbers = [random.randint(0, 999) for i in range(10)]
+print("Unsorted:")
+for i in numbers:
+    print(i)
+print("Sorted:")
+for i in bubble_sort(numbers):
+    print(i)
+
+Copy<br><br>Als Anlage zu diesem Übungsblatt finden Sie die Datei StarTrekTNG.csv aus der Vorlesung, die eine Liste der Episoden der Science-Fiction-Serie "Star Trek: Die nächste Generation" enthält. Hier ein Ausschnitt der Datei:<br>Titel;Staffel;Episode;Disk
+Encounter at Farpoint;1;01/02;1
+The Naked Now;1;03;1
+...
+Copy<br>Schreiben Sie ein Programm, das alle Folgen ausgibt, die ein vom Nutzer oder der Nutzerin vorgegebenes Textfragment im Titel enthalten. Das Programm sollte<br>
+<br>die Datei einlesen,
+<br>Nutzer oder Nutzerin nach einem Titelfragment fragen und
+<br>alle Episoden ausgeben, deren Titel das Fragment enthalten, inklusive Staffel-, Epsioden- und Disk-Nummer.
+<br>Die Felder sollen in geeigneter Weise formatiert werden.<br>Hinweise:<br>
+<br>Staffel- und Disk-Nummern müssen ggf. in Zahlen umgewandelt werden.
+<br>Episoden-Nummern sind nicht immer Zahlen (z.B. "01/02" für Doppelfolgen).
+<br>Nutzen Sie den in-Operator, um auf das Vorhandensein eines Titelfragments zu prüfen.
+<br>Groß- und Kleinschreibung sollen ignoriert werden sein, d.h. die Episode "The Naked Now" sollte auch aufgelistet werden, wenn der Suchstring "naked" (klein geschrieben) lautet. Sie können den Ausdruck s.lower() verwenden, um den String s in Kleinbuchstaben zu verwandeln.
+<br>from dataclasses import dataclass
+
+
+@dataclass
+class Episode:
+    title: str
+    season: int
+    episode_nr: str
+    disk: int
+
+
+file = open("StarTrekTNG.csv", "r")
+episodes = []
+for l in file.readlines()[1::]:
+    e = l.split(";")
+    episodes.append(Episode(e[0], int(e[1]), e[2], int(e[3])))
+
+fragment = input("Nach welcher Folge soll gesucht werden?\n")
+candidates = []
+for e in episodes:
+    if fragment.lower() in e.title.lower():
+        candidates.append(e)
+if candidates == []:
+    print("Es konnten keine passenden Titel gefunden werden!")
+for c in candidates:
+    print(
+        "Titel: "
+        + c.title
+        + "\n"
+        + "Staffel: "
+        + str(c.season)
+        + "\n"
+        + "Folge: "
+        + c.episode_nr
+        + "\n"
+        + "Disk: "
+        + "c.disk"
+        + "\n\n"
+    )
+
+Copy<br><br>Schreiben Sie ein Programm, das eine Liste mit Namen und Telefonnummern verwaltet. Die Liste soll in einer Datei gespeichert werden.<br>Zum Start soll das Programm fragen, ob ein Eintrag hinzugefügt oder gesucht werden soll.<br>Soll ein Eintrag gesucht werden, so soll nach einem Suchtext gefragt werden und alle Einträge ausgegeben werden, deren Namen den Suchtext enthalten. Hier soll Groß- und Kleinschreibung irrelevant sein.<br>Soll ein Eintrag hinzugefügt werden, so soll nach dem Namen und der Telefonnummer gefragt werden. Fügen Sie den neuen Eintrag der Liste von Einträgen hinzu und schreiben Sie die Datenbankdatei neu so, dass alle Einträge inklusive des neuen Eintrags darin enthalten sind.<br>Sie können das Programm mit fiktiven Namen und Telefonnummern testen.<br>from dataclasses import dataclass
+import os.path
+
+
+@dataclass(unsafe_hash=True)
+class Entry:
+    name: str
+    number: str
+
+
+entries = []
+if os.path.isfile("book.db"):
+    book = open("book.db", "r")
+else:
+    book = open("book.db", "x")
+
+for e in book:
+    e = e.split("$")
+    entries.append(Entry(e[0], e[1]))
+book.close()
+
+action = int(
+    input(
+        "Soll ein neuer Eintrag gemacht werden (1) oder nach einer Telefonnummer gesucht werden (2)?\n"
+    )
+)
+match action:
+    case 1:
+        entries.append(Entry(input("Name: \n"), input("Nummer: \n")))
+    case 2:
+        fragment = input("Name:\n")
+        candidates = []
+        for e in entries:
+            if fragment.lower() in e.name.lower():
+                candidates.append(e)
+        if candidates == []:
+            print("Es konnten keine passenden Einträge gefunden werden!")
+        for c in candidates:
+            print("Name: " + c.name + "\n" + "Nummer: " + c.number + "\n\n")
+
+book = open("book.db", "w")
+book.writelines(f"{e.name}${e.number}\n" for e in list(set(entries)))
+
+book.close()
+
+Copy]]></description><link>aufgabenblatt04/aufgabenblatt04.html</link><guid isPermaLink="false">Aufgabenblatt04/Aufgabenblatt04.md</guid><pubDate>Mon, 04 Nov 2024 07:10:13 GMT</pubDate></item><item><title><![CDATA[Tutorium Programmieren (Prof. Dr. Ralf Gerlich)]]></title><description><![CDATA[ 
+ <br><br><br><br>Schreiben Sie ein Stück Python-Code, das mit maximal 10 Versuchen eine Zahl zwischen 0 und 1023 (jeweils einschließlich) raten soll. Verwenden Sie dafür Bisektionssuche: Das Programm darf Fragen der Art "Ist die Zahl größer als 125?" stellen.<br>So testen Sie Ihr Programm: Denken Sie sich eine Zahl zwischen 0 und 1023 (jeweils einschließlich) aus und lassen Sie das Programm raten.<br>Optionale Zusatzfrage: Welchen Grund könnte wohl die "krumme" Zahl 1023 haben?<br>def binary_search(region, attempts=1):
+    # 0 =&gt; kleiner, 1 =&gt; größer, 2 =&gt; richtig
+    match int(
+        input(
+            "Ist es "
+            + str(region[(len(region) - 1) // 2])
+            + "? (0 =&gt; kleiner, 1 =&gt; größer, 2 =&gt; richtig)\n"
+        )
+    ):
+        case 0:
+            return binary_search(region[: (len(region) - 1) // 2 - 1], attempts + 1)
+        case 1:
+            return binary_search(region[(len(region) - 1) // 2 + 1 : :], attempts + 1)
+        case 2:
+            print(
+                str(region[(len(region) - 1) // 2])
+                + " nach "
+                + str(attempts)
+                + " Versuch(en) gefunden\n"
+            )
+            return region[(len(region) - 1) // 2]
+
+
+binary_search(range(0, 1024, 1))
+
+Copy<br>1023 ist die größte Zahl, welche sich mit 10 Bits darstellen lässt. Binary Search ist ein Algorithmus mit logarithmischer Komplexität, also kann es in maximal 2^n Versuchen das richtige aus n Elementen finden. In der Aufgabe sind maximal 10 Versuche beschrieben, also darf man, um die maximale Anzahl von Elementen nicht zu überschreiten, maximal 2^10 Elemente benutzen, in diesem Fall alles von 0 bis 2^10-1<br><br>Schreiben Sie ein Programm, das zwei Kommazahlen p und q einliest und die beiden Lösungen der Quadratischen Gleichung  ausgibt. Diese Lösungen können Sie mit der sogenannten p-q-Formel berechnen: <br>Falls keine reelle Lösung existiert (), soll statt der Lösungen eine entsprechende Meldung ausgegeben werden.<br>Hinweis: In der untenstehenden Zelle können Sie den Ausdruck sqrt(x) zur Berechnung der Wurzel von x verwenden.<br>Geben Sie zusätzlich auch die Werte von  für  und  aus.<br>Probieren Sie das Programm mit den Werten 1 für p und 1E-16 für q aus. Können Sie sich das Ergebnis erklären?<br>from math import sqrt
+
+q = float(input("q: "))
+p = float(input("p: "))
+
+if pow(p / 2, 2) &lt; 2:
+    print("Fehler: Keine reelle Lösung!")
+else:
+    x1 = -(p / 2) + sqrt(pow(p / 2, 2) - q)
+    x2 = -(p / 2) - sqrt(pow(p / 2, 2) - q)
+    print("x1: " + str(x1) + "\nx2: " + str(x2))
+    print("x1²+px1+q = " + str(pow(x1, 2) + p * x1 + q))
+    print("x2²+px2+q = " + str(pow(x2, 2) + p * x2 + q))
+
+Copy<br><br>Implementieren Sie eine Funktion to_bin, die für eine nicht-negative ganze Zahl deren kürzestmögliche Binärdarstellung als String zurückliefert. Zur Berechnung der Binärdarstellung dürfen Sie keine Bibliotheksfunktionen verwenden!<br>Testen Sie die Funktion mit dem vorgegebenen Testprogramm.<br>def to_bin(zahl):
+    def to_bin(x):
+        if x == 0:
+            return "0"
+        return str(x % 2) + to_bin(x // 2)
+
+
+print(to_bin(int(input("Welche Zahl soll konvertiert werden?\n")))[::-1])
+
+
+while True:
+    zahl = int(input("Nicht-negative Ganzzahl eingeben:"))
+    if zahl &gt;= 0:
+        print(f"Die Binärdarstellung von {zahl} ist {to_bin(zahl)}")
+        break
+Copy<br>Nicht-negative Ganzzahl eingeben: -2
+Nicht-negative Ganzzahl eingeben: 1
+
+
+Die Binärdarstellung von 1 ist None
+Copy<br>Copy<br><br>Die Datei telefonbuch.csv enthält eine Liste von fiktiven Nachnamen, Vornamen und Telefonnummern. Sie ist ähnlich der Datei mit der Star-Trek-Episodenliste aus Aufgabenblatt 4 formatiert. Die Einträge sind aufsteigend nach Nach- und Vorname sortiert.<br>Schreiben Sie ein Programm, das alle Einträge in eine Liste von Tupeln einliest, dann nach einem Nach- und Vornamen fragt und - sofern vorhanden - die zugehörige Telefonnummer ausgibt. Verwenden Sie das Bisektionsverfahren, um den gesuchten Eintrag innerhalb von 10 Vergleichen oder weniger zu finden.<br>def binary_search(region, name):
+    if name.lower() == region[(len(region) - 1) // 2][0].lower():
+        return region[(len(region) - 1) // 2]
+
+    if name.lower() &lt; region[(len(region) - 1) // 2][0].lower():
+        return binary_search(region[: (len(region) - 1) // 2 - 1], name)
+
+    if name.lower() &gt; region[(len(region) - 1) // 2][0].lower():
+        return binary_search(region[(len(region) + 1) // 2 - 1 : :], name)
+
+
+entries = []
+book = open("telefonbuch.csv", "r")
+for l in book.readlines()[1::]:
+    temp = l.split(";")
+    if temp == ["\n"]:
+        continue
+    entries.append((temp[0], temp[1], temp[2]))
+
+fragment = input("Nach welchem Namen suchen sie?\n")
+out = binary_search(entries, fragment)
+print("Name: " + out[0] + " " + out[1] + "\nTelefonnummer: " + out[2])
+
+Copy]]></description><link>aufgabenblatt05/aufgabenblatt05.html</link><guid isPermaLink="false">Aufgabenblatt05/Aufgabenblatt05.md</guid><pubDate>Mon, 04 Nov 2024 07:10:14 GMT</pubDate></item><item><title><![CDATA[Tutorium Programmieren (Prof. Dr. Ralf Gerlich)]]></title><description><![CDATA[ 
+ <br><br><br><br>In der Statistik werden häufig sogenannte Zentrale Tendenzmaße wie Mittelwert oder Median berechnet.<br>Implementieren Sie ein Stück Code, das eine Liste mit 1000 Zufallszahlen füllt und dann den Median und den Mittelwert berechnet. Nutzen Sie für die Erzeugung einer Zufallszahl die Funktion randint aus dem random-Modul und für die Berechnung von Mittelwert und Median entsprechende Funktionen aus dem Modul statistics.<br>Die Liste der vorhandenen Module finden Sie unter "Library Reference" in der <a data-tooltip-position="top" aria-label="https://docs.python.org" rel="noopener nofollow" class="external-link" href="https://docs.python.org" target="_blank">Standard-Python-Dokumentation</a>.<br>from random import randint
+import statistics
+
+numbers = [randint(0, 999) for i in range(10)]
+median = statistics.median(numbers)
+mean = statistics.mean(numbers)
+Copy<br><br>Eine wichtige Eigenschaft des Kosinus ist, dass  gilt (sofern man mit Winkeln im Bogenmaß arbeitet). Schreiben Sie eine Funktion pi_half, die den Wert von  bis auf eine vorgegebene Maximalabweichung epsilon genau bestimmt, indem Sie mit Hilfe eines Bisektionsalgorithmus die einzige Nullstelle im Bereich zwischen  und  finden. Verwenden Sie explizit nicht die Konstante pi aus der Bibliothek math!<br>Der Wert von epsilon soll per Aufrufparameter festlegbar sein. Wird der Parameter epsilon nicht angegeben, so soll als Standardwert 1E-5 (also ) angenommen werden.<br>Fügen Sie der Funktion einen passenden Docstring hinzu, der die Verwendung der Funktion, nicht jedoch ihre Implementierung erläutert.<br>Verwenden Sie die Funktion cos aus dem math-Modul zur Berechnung des Kosinus. Diese erwarte einen Wert im Bogenmaß. Bedenken Sie, dass der Kosinus in diesem Wertebereich monoton fallend ist, d.h. der Kosinus wird kleiner, je größer der Winkel wird.<br>import argparse
+from math import isclose, cos
+
+
+def pi_half(epsilon, left=0.0, right=2.0):
+    """Berechnet pi/2.
+    Parameter:
+    epsilon -- die Fehlertoleranz der Funktion (höher =&gt; ungenauer)
+    left -- kann ignoriert werden
+    right -- kann ignoriert werden
+    """
+    mid = (left + right) / 2
+    if isclose(cos(mid), 0, abs_tol=float(epsilon)):
+        return (left + right) / 2
+    elif cos(mid) &lt; 0:
+        return pi_half(epsilon, left, mid)
+    elif cos(mid) &gt; 0:
+        return pi_half(epsilon, mid, right)
+
+
+parser = argparse.ArgumentParser(
+    prog="half_pi", description="find pi/2 within a certain error", epilog="fuck"
+)
+parser.add_argument("-e", "--epsilon", nargs="?", default=1e-5)
+args = parser.parse_args()
+
+print(pi_half(args.epsilon))
+
+Copy<br><br>Ein wichtiger Faktor bei der Auswahl von Algorithmen ist die Ausführungszeit.<br>Implementieren Sie ein Stück Code, das eine Liste mit 1000, 100 000 und 10 000 000 Zufallszahlen füllt und dann mit Hilfe der sorted-Funktion sortiert. Messen Sie jeweils die Zeit, die zur Ausführung benötigt wird, und geben Sie diese Zeit aus. Nutzen Sie für die Erzeugung einer Zufallszahl die Funktion randint aus dem random-Modul.<br>Zur Zeitmessung können Sie die Funktion <a data-tooltip-position="top" aria-label="https://docs.python.org/3/library/time.html#time.process_time_ns" rel="noopener nofollow" class="external-link" href="https://docs.python.org/3/library/time.html#time.process_time_ns" target="_blank"><code></code> aus dem Modul <code></code></a>process_time_nstime verwenden. Diese liefert einen Zeitwert in Nanosekunden (1 Sekunde enthält 1 Milliarde Nanosekunden), den Sie verwenden können, um Ausführungszeiten zu messen.<br>Das Prinzip ist einfach: Sie bestimmen den Zeitwert vor und nach der Ausführung des relevanten Codestücks. Die Differenz zwischen den beiden Zeiten ist die Ausführungszeit des Codestücks - hier eben in Nanosekunden.<br>from random import randint
+from time import process_time_ns
+
+numbers1 = [randint(0, 999) for i in range(1000)]
+
+numbers2 = [randint(0, 999) for i in range(100000)]
+
+numbers3 = [randint(0, 999) for i in range(10000000)]
+
+start = process_time_ns()
+numbers1 = sorted(numbers1)
+end = process_time_ns()
+print("Benötigte Zeit bei 1000 Elementen:" + str(end - start))
+
+start = process_time_ns()
+numbers2 = sorted(numbers2)
+end = process_time_ns()
+print("Benötigte Zeit bei 100000 Elementen:" + str(end - start))
+
+start = process_time_ns()
+numbers3 = sorted(numbers3)
+end = process_time_ns()
+print("Benötigte Zeit bei 10000000 Elementen:" + str(end - start))
+
+Copy<br><br>Erstellen Sie ein Modul vektoren, in dem Sie die Vektorfunktionen vektor_summe, skalar_produkt und skaliere aus Aufgabe 1 im Aufgabenblatt 3 bereitstellen.<br>Versehen Sie Modul und Funktionen mit entsprechenden Docstrings zur Dokumentation.<br>Schreiben Sie ein Testcode, der das Modul importiert und jede der Funktionen mindestens einmal verwendet.<br>Als Datei abgespeichert]]></description><link>aufgabenblatt06/aufgabenblatt06.html</link><guid isPermaLink="false">Aufgabenblatt06/Aufgabenblatt06.md</guid><pubDate>Mon, 04 Nov 2024 07:10:15 GMT</pubDate></item><item><title><![CDATA[Tutorium Programmieren (Prof. Dr. Ralf Gerlich)]]></title><description><![CDATA[ 
+ <br><br><br><br>Ein Anagramm ist ein Wort, das durch Umstellung der Buchstabenreihenfolge aus einem anderen Wort hervorgeht. So ist "Erbgut" ein Anagramm von "Betrug", oder "Lagerregal" ist ein Anagramm von "Regallager". Weitere Beispiele sind "Tokio" und "Kioto".<br>Damit ein Wort s also ein Anagramm eines Wortes t ist, dürfen s und t nicht gleich sein, aber alle Buchstaben müssen in beiden Worten gleich häufig vorkommen. Groß- und Kleinschreibung ist dabei nicht relevant. Für einen String s liefert der Ausdruck s.lower() den äquivalenten String, bei dem alle Großbuchstaben in Kleinbuchstaben umgewandelt wurden.<br>Schreiben Sie ein Programm, das zwei Worte einliest und prüft, ob sie Anagramme voneinander sind.<br>from dataclasses import dataclass
+
+
+@dataclass
+class Entry:
+    char: str
+    count: int
+
+    def __lt__(self, other):
+        return self.char &lt; other.char
+
+
+word1 = input("Wort 1: \n")
+word2 = input("Wort 2: \n")
+
+
+if word1.lower() == word2.lower():
+    print("beide Worte sind gleich!")
+
+if len(word1) != len(word2):
+    print("Die Worte haben unterschiedlich viele Buchstaben!")
+
+entries1 = []
+for w in word1.lower():
+    existing = False
+    for e in entries1:
+        if w == e.char:
+            existing = True
+            e.count += 1
+    if existing:
+        continue
+    entries1.append(Entry(w, 1))
+
+
+entries2 = []
+for w in word2.lower():
+    existing = False
+    for e in entries2:
+        if w == e.char:
+            existing = True
+            e.count += 1
+    if existing:
+        continue
+    entries2.append(Entry(w, 1))
+
+if sorted(entries1) == sorted(entries2):
+    print("Die eingegebenen Worte sind Anagramme!")
+
+Copy<br><br>Der folgende Code liest den Text eines Billy-Joel-Lieds aus dem Jahr 1977 ein und liefert eine Liste von Worten in der Datei (alle in Kleinbuchstaben).<br>Ergänzen Sie das Programm so, dass es das am häufigsten vorkommende Wort ausgibt.<br>import re
+from dataclasses import dataclass
+
+
+@dataclass
+class Entry:
+    word: str
+    count: int
+
+    def __lt__(self, other):
+        self.count &lt; other.count
+
+
+with open("shes-always-a-woman.txt", "r", encoding="utf-8") as infile:
+    lyrics = infile.read()
+words = list(map(lambda s: s.lower(), re.split(r"\W+", lyrics)))
+entries = []
+for w in words:
+    existing = False
+    for e in entries:
+        if w == e.word:
+            existing = True
+            e.count += 1
+    if existing:
+        continue
+    entries.append(Entry(w, 1))
+
+idx = 0
+for i in range(len(entries)):
+    if entries[idx].count &gt; entries[i].count:
+        continue
+    if entries[idx].count &lt; entries[i].count:
+        idx = i
+print("Das am häufigste vorkommende Wort: " + entries[idx].word)
+
+Copy<br><br>Das Dictionary speisekarte im folgenden Codestück enthält die Namen von Getränken und Gerichten sowie deren Preise.<br>Schreiben Sie ein Programm, mit dem in einem Restaurant für einen Tisch abgerechnet werden kann. Führen Sie dazu folgende Schritte aus:<br>
+<br>Setzen Sie die Variable summe auf 0.
+<br>Geben Sie die Liste der Gerichte (ohne Preis) aus.
+<br>Lassen Sie Nutzer oder Nutzerin den Namen eines Gerichts eingeben.
+<br>Wenn ein leerer String eingegeben wurde, geben Sie den Wert von summe aus und beenden Sie das Programm.
+<br>Wenn für das Gericht ein Eintrag im Dictionary existiert, addieren Sie den Preis zur Variablen summe hinzu und setzen Sie bei Schritt 2 fort.
+<br>Wenn für das Gericht kein Eintrag im Dictionary existiert, geben Sie eine Fehlermeldung aus und setzen Sie bei Schritt 2 fort.
+<br>speisekarte = {
+    "Stilles Wasser": 2.90,
+    "Mineralwasser": 2.90,
+    "Cola": 2.90,
+    "Bitter Lemon": 3.60,
+    "Orangensaft": 3.90,
+    "Espresso": 2.30,
+    "Heiße Schokolade": 4.10,
+    "Salat": 6.50,
+    "Flädlesuppe": 6.50,
+    "Maultaschen": 16.80,
+    "Kässpätzle": 15.30,
+    "Schweinelendchen": 23.90,
+    "Ofenkartoffeln": 14.90,
+    "Gebratener Ziegenkäse": 15.50,
+}
+
+sum = 0
+for x in speisekarte:
+    print(x)
+
+while True:
+    dish = input("Welches Gericht hätten sie gerne?\n")
+    if dish == "":
+        break
+    if not dish in speisekarte:
+        print("Dieses Gericht haben wir nicht!")
+        continue
+    sum += speisekarte[dish]
+print("Ihre Endsumme: " + str(sum))
+
+Copy<br><br>In der Datei capitals.csv sind 262 Hauptstädte von 246 Ländern enthalten. Jede Zeile in der Datei enthält den Namen eines Landes und den Namen seiner Hauptstadt. Diese sind durch ein Semikolon (;) getrennt (das Format ist ähnlich der Star-Trek-Episodenliste aus Aufgabenblatt 4).<br>Sie sehen es an den Zahlen: Einige der Länder haben mehr als eine Hauptstadt (z.B. Abidjan und Yamoussourkou für die Elfenbeinküste). Meist ist eines die Hauptstadt nach gesetzlicher Festlegung, aber die Regierungseinrichtungen befinden sich in der anderen Stadt.<br>Lesen Sie die Liste ein und geben Sie für alle Länder mit mehr als einer Hauptstadt jeweils den Namen des Landes und die Namen seiner Hauptstädte aus.<br>Hinweis: Nutzen Sie für die Speicherung ein Dictionary, das den Landesnamen auf eine Liste von Hauptstädten abbildet.<br>from dataclasses import dataclass
+
+
+@dataclass
+class Country:
+    country: str
+    capitals: []
+
+
+capitals = {}
+
+countries_list = open("capitals.csv", "r")
+for l in countries_list.readlines():
+    temp = l.split(";")
+    if temp == ["\n"]:
+        continue
+    capitals[temp[1]] = temp[0]
+
+countries = []
+for i in capitals:
+    for j in capitals:
+        if i == j:
+            continue
+        if capitals[i] == capitals[j]:
+            countries.append(Country(capitals[i], [i, j]))
+
+for c in countries:
+    print(
+        "Name des Landes: "
+        + c.country
+        + "\nName seiner Hauptstädte: \n"
+        + c.capitals[0]
+        + c.capitals[1]
+    )
+
+Copy]]></description><link>aufgabenblatt07/aufgabenblatt07.html</link><guid isPermaLink="false">Aufgabenblatt07/Aufgabenblatt07.md</guid><pubDate>Mon, 04 Nov 2024 07:10:15 GMT</pubDate></item><item><title><![CDATA[Tutorium Programmieren (Prof. Dr. Ralf Gerlich)]]></title><description><![CDATA[ 
+ <br><br><br><br>In dieser Aufgabe werden Sie eine Funktion implementieren, die eine <a data-tooltip-position="top" aria-label="https://de.wikipedia.org/wiki/Tiefensuche" rel="noopener nofollow" class="external-link" href="https://de.wikipedia.org/wiki/Tiefensuche" target="_blank">Tiefensuche</a> (Depth-First Search, DFS) durchführt, um einen Weg von einem Startpunkt zu einem Endpunkt in einem vorgegebenen Labyrinth zu finden.<br><br>Die Tiefensuche ist ein leistungsfähiges Verfahren, das in vielen Bereichen der Künstlichen Intelligenz eingesetzt wird, um Probleme zu lösen, die das Durchsuchen und Analysieren von großen Zustandsräumen erfordern.<br><br>
+<br>Lösung von Labyrinthen: Finden eines Weges durch ein Labyrinth.
+<br>Topologisches Sortieren: Sortieren von Knoten in einem gerichteten Graphen (z.B. Reihenfolge bei der Installation von Softwarepaketen).
+<br>Erkennung von Zyklen: Prüfung, ob ein Graph (z.B. ein Computernetzwerk oder ein Kontrollflussgraph eines Programms) Schleifen enthält.
+<br>Komponentenverbindung: Prüfung, ob in einem Graphen (z.B. einem Computernetzwerk) jeder Knoten mit jedem anderen direkt oder indirekt verbunden ist.
+<br><br>
+<br>Einfach zu implementieren: Besonders mit Rekursion leicht umsetzbar.
+<br>Speicherökonomisch: Verbraucht im Vergleich zu anderen Suchalgorithmen weniger Speicher, wenn das zu lösende Problem groß ist.
+<br>Pfadfindung: Gut geeignet, um Pfade oder Lösungen in Szenarien wie Labyrinthen zu finden.
+<br><br>
+<br>Nicht die kürzeste Route: DFS garantiert nicht die kürzeste Route zwischen zwei Punkten.
+<br>Kann ineffizient sein: Im ungünstigsten Fall müssen alle Knoten im Graphen (z.B. Orte im Labyrinth) besucht werden, bevor eine Lösung gefunden wird.
+<br>Effizientere Alternativen zur Tiefensuche sind etwa der <a data-tooltip-position="top" aria-label="https://de.wikipedia.org/wiki/Dijkstra-Algorithmus" rel="noopener nofollow" class="external-link" href="https://de.wikipedia.org/wiki/Dijkstra-Algorithmus" target="_blank">Dijkstra-</a> oder der <a data-tooltip-position="top" aria-label="https://de.wikipedia.org/wiki/A*-Algorithmus" rel="noopener nofollow" class="external-link" href="https://de.wikipedia.org/wiki/A*-Algorithmus" target="_blank">A*-Algorithmus</a>. Diese sind auch in der Lage, den kürzesten (oder kostengünstigsten) Weg zwischen zwei Punkten zu finden. <a data-tooltip-position="top" aria-label="https://www.youtube.com/watch?v=aW9kZcJx64o" rel="noopener nofollow" class="external-link" href="https://www.youtube.com/watch?v=aW9kZcJx64o" target="_blank">Hier</a> können Sie in einem Video einen Vergleich dieser Algorithmen finden.<br><br>Wir können ein Labyrinth als eine Liste von Strings darstellen:<br>    maze = [
+        "#########",
+        "#       #",
+        "# ##### #",
+        "# #   # #",
+        "# # # # #",
+        "#   #   #",
+        "#########"
+    ]
+Copy<br>Diese Liste enthällt Strings.<br>Wände werden mit '#' dargestellt.<br>Offene Pfade werden mit ' ' dargestellt.<br>Der Startpunkt wird mit 'S' dargestellt.<br>Der Endpunkt wird mit 'E' dargestellt.<br>Die besuchten Pfade werden mit '.' dargestellt.<br>Beispiel:<br>    maze = [
+        "#########",
+        "#S      #",
+        "#.##### #",
+        "#.#...# #",
+        "#.#.#.# #",
+        "#...#..E#",
+        "#########"
+    ]
+Copy<br>Das folgende Bild zeigt die Darstellung dieses gelösten Labyrinths:<br>
+<br>Blau ist der Startpunt
+<br>Grün ist der gewählte Weg
+<br>Rot ist der Endpunkt, also unser Ziel
+<br><br><br>Das Ziel der Tiefensuche ist es, einen Weg von einem Startpunkt zu einem Zielpunkt zu finden, falls ein solcher existiert.<br>
+<br>Initialisierung:
+<br>  Beginnen Sie bei einem Startpunkt im Labyrinth. Dieser Punkt ist mit 'S' markiert.<br>  Markieren Sie diesen Punkt nun mit '.' als besucht, um anzuzeigen, dass Sie diesen Punkt bereits erkundet haben.<br>
+<br>Wegsuche:
+<br>  Betrachten Sie von Ihrem aktuellen Standpunkt aus nacheinander alle direkt angrenzenden Zellen (oben, unten, links, rechts).<br>
+Für jede angrenzende Zelle:<br>
+<br>Wenn es eine Wand ist oder schon besucht wurde, ignorieren Sie diese Richtung.
+<br>Wenn es ein offener Pfad ist und es der Endpunkt ist, haben Sie den Zielpunkt erreicht.
+<br>Wenn es ein offener Pfad ist und nicht der Endpunkt, rufen Sie die DFS-Funktion rekursiv für diese Zelle auf.
+<br>  Auf diese Weise wird jeder mögliche vom Start ausgehende Weg nacheinander systematisch abgearbeitet, bis das Ziel erreicht wurde.<br>
+<br>Rekursion und Backtracking:
+<br>  Die DFS-Funktion wird rekursiv aufgerufen, um tiefer in das Labyrinth zu gehen. Dies setzt sich fort, bis entweder das Ziel gefunden ist oder keine weiteren unbesuchten offenen Zellen mehr vorhanden sind.<br>
+Wenn das Ziel nicht gefunden wird und keine weiteren Zellen zu erkunden sind, kehrt die Funktion zurück und signalisiert, dass kein Weg gefunden wurde. Die aufrufende Funktion probiert dann den nächsten möglichen Weg. Dieses Prinzip bezeichnet man auch als Backtracking, da so dem bisher erkundeten Pfad rückwärts gefolgt wird, bis man einen Punkt erreicht, an dem noch unerkundete Pfade abzweigen.<br>  Bei Backtracking sollen Sie die Pfade, die bereits besucht wurden, aber nicht erfolgreich waren, gesondert mit 'X' markiert werden. Diese Markierungen helfen zu visualisieren, welche Wege bereits untersucht wurden.<br>  Betreten Sie keine Wege, die mit 'X' markiert wurden.<br>
+<br>Beendigung:
+<br>  Der Prozess endet, wenn entweder das Ziel gefunden wurde (Erfolg) oder alle möglichen Wege erkundet wurden, ohne das Ziel zu erreichen (Fehlschlag).<br><br>Das folgende Code-Fragment illustriert den grundsätzlichen Ablauf.<br>def dfs(maze, x, y, end_x, end_y, path):
+    # Überprüfe, ob die aktuelle Position außerhalb der Grenzen des Labyrinths liegt oder ob sie eine Wand ist, oder ob sie mit 'X' bereits markiert wurde
+    # Kein gültiger Zug =&gt; kehre zurück mit FALSCH
+    if (
+        (x &lt; 0)
+        or (x &gt;= len(maze[0]))
+        or (y &lt; 0)
+        or (y &gt;= len(maze))
+        or (maze[y][x] == "#")
+        or (maze[y][x] == "X")
+    ):
+        return False
+
+    # Überprüfe, ob die aktuelle Position das Ziel ist
+    # Füge die Zielposition zum Pfad hinzu
+    # Das Ziel wurde erreicht =&gt; kehre zurück mit WAHR
+    if (x, y) == (end_x, end_y):
+        path.append((x, y))
+
+    # Überprüfe, ob die aktuelle Zelle schon Teil des Pfades ist oder als besucht markiert wurde mit '.' oder 'X'
+    # Die Zelle wurde bereits besucht =&gt; kehre zurück mit FALSCH
+    if ((x, y) in path) or (maze[y][x] == ".") or (maze[y][x] == "X"):
+        return False
+
+    # Markiere die aktuelle Zelle als besucht, indem du sie mit '.' markierst
+    # Füge die aktuelle Position zum Pfad hinzu
+    maze[y][x] = "."
+    path.append((x, y))
+
+    # Rekursive DFS-Suche in alle vier Richtungen (unten, oben, rechts, links) // siehe 3.Rekursion und Backtracking
+    # Wenn einer der Aufrufe mit WAHR zurückkehrt, wurde ein zulässiger Weg gefunden =&gt; kehre zurück mit WAHR
+    directions = [(-1, -1), (0, -1), (1, 0), (1, 1)]
+    for dx, dy in directions:
+        return dfs(maze, x + dx, y + dy, end_x, end_y, path)
+
+    # Entferne die aktuelle Position vom Pfad
+    # Ersetzt die aktuelle Zelle mit 'X', um sie als Sackgasse zu markieren
+    # Kehre zurück mit FALSCH, da kein Pfad durch diese Zelle führt
+    path.remove((x, y))
+    maze[y][x] = "X"
+    return False
+
+Copy<br><br>Implementieren Sie nur die Funktion dfs(maze, x, y, end_x, end_y, path).<br>Bitte ändern Sie den sonstigen Code nicht für die Abgabe.<br>Erklärung der Input-Parameter:<br>
+<br>maze: Eine Liste von Listen, die das Labyrinth darstellt (zu Erläuterung siehe oben).
+<br>x, y: Aktuelle Koordinaten im Labyrinth.
+<br>end_x, end_y: Zielkoordinaten.
+<br>path: Liste, die den Pfad speichert, der während der Suche gefunden wird.
+<br><br>maze[x][y]: Gibt den Wert der Zelle an der Position (x, y) im Labyrinth zurück. Dieser Wert kann anzeigen, ob es sich um eine Wand ('#'), einen freien Weg (' ') oder einen besuchten Punkt mit ('.') handelt.<br>maze[x][y] = '.': Setzt die Zelle an der Position (x, y) auf '.', was bedeutet, dass diese Zelle als bereits besuchte Zelle markiert wird.<br>path.append((x, y)):  Fügt das Tupel (x, y), welches die aktuelle Position repräsentiert, zur Liste path hinzu. Dies dient dazu, den zurückgelegten Weg zu verfolgen.<br>path.pop():  Entfernt das zuletzt mit append hinzugefügte Element aus der Liste path. Dies wird typischerweise verwendet, um einen Schritt im Pfad rückgängig zu machen, wenn ein Rückzug (Backtracking) stattfindet, weil kein weiterer Fortschritt möglich ist.<br>len(maze): gibt die Anzahl der Zeilen im Labyrinth zurück. Kann verwendet werden, um zu überprüfen, ob sich x innerhalb des Labyrinths befindet.<br>len(maze[0]): gibt die Länge des ersten Elements in der Liste zurück. Kann verwendet werden, um zu überprüfen, ob sich y innerhalb des Labyrinths befindet.<br><br>def dfs(maze, x, y, end_x, end_y, path):
+    # Überprüfe, ob die aktuelle Position außerhalb der Grenzen des Labyrinths liegt oder ob sie eine Wand ist, oder ob sie mit 'X' bereits markiert wurde
+    # Kein gültiger Zug =&gt; kehre zurück mit FALSCH
+    if (
+        (x &lt; 0)
+        or (x &gt;= len(maze[0]))
+        or (y &lt; 0)
+        or (y &gt;= len(maze))
+        or (maze[y][x] == "#")
+        or (maze[y][x] == "X")
+    ):
+        return False
+
+    # Überprüfe, ob die aktuelle Position das Ziel ist
+    # Füge die Zielposition zum Pfad hinzu
+    # Das Ziel wurde erreicht =&gt; kehre zurück mit WAHR
+    if (x, y) == (end_x, end_y):
+        path.append((x, y))
+
+    # Überprüfe, ob die aktuelle Zelle schon Teil des Pfades ist oder als besucht markiert wurde mit '.' oder 'X'
+    # Die Zelle wurde bereits besucht =&gt; kehre zurück mit FALSCH
+    if ((x, y) in path) or (maze[y][x] == ".") or (maze[y][x] == "X"):
+        return False
+
+    # Markiere die aktuelle Zelle als besucht, indem du sie mit '.' markierst
+    # Füge die aktuelle Position zum Pfad hinzu
+    maze[y][x] = "."
+    path.append((x, y))
+
+    # Rekursive DFS-Suche in alle vier Richtungen (unten, oben, rechts, links) // siehe 3.Rekursion und Backtracking
+    # Wenn einer der Aufrufe mit WAHR zurückkehrt, wurde ein zulässiger Weg gefunden =&gt; kehre zurück mit WAHR
+    directions = [(-1, -1), (0, -1), (1, 0), (1, 1)]
+    for dx, dy in directions:
+        return dfs(maze, x + dx, y + dy, end_x, end_y, path)
+
+    # Entferne die aktuelle Position vom Pfad
+    # Ersetzt die aktuelle Zelle mit 'X', um sie als Sackgasse zu markieren
+    # Kehre zurück mit FALSCH, da kein Pfad durch diese Zelle führt
+    path.remove((x, y))
+    maze[y][x] = "X"
+    return False
+
+Copy<br><br>import matplotlib.pyplot as plt
+import numpy as np
+from matplotlib.colors import ListedColormap
+
+def print_maze(maze, start, end):
+    color_map = {'#': 0, ' ': 1, '.': 2, 'S': 3, 'E': 4, 'X': 5}
+    maze[start[0]][start[1]] = 'S'
+    maze[end[0]][end[1]] = 'E'
+    maze_color = np.array([[color_map[cell] for cell in row] for row in maze])
+    cmap = ListedColormap(['black', 'white', 'lime', 'blue', 'red', 'gray'])
+
+    plt.figure(figsize=(10, 5))
+    plt.imshow(maze_color, cmap=cmap, interpolation='nearest')
+    plt.xticks([]), plt.yticks([])
+    plt.show()
+
+# Gegebenes Labyrinth
+maze = [
+    "######################",
+    "#       #           ##",
+    "# #### # ##### ##### #",
+    "#    # #     #     # #",
+    "# # ## # ### ##### # #",
+    "# # ## #     #     # #",
+    "# # ## ##### ####### #",
+    "# #           #      #",
+    "####### ########## ###",
+    "#                   ##",
+    "######################"
+]
+
+# Definiert den Start- und Endpunkt
+maze = [list(row) for row in maze]
+starts_ends = [((1, 15), (9, 17)), ((1, 2), (9, 17))]
+
+# Prüft, ob ein Weg gefunden worden ist.
+for start, end in starts_ends:
+    path = []
+    if dfs(maze, *start, *end, path):
+        print("Weg gefunden von", start, "nach", end)
+        print_maze(maze, start, end)
+    else:
+        print("Kein Weg gefunden von", start, "nach", end)
+
+    # Labyrinth zurücksetzen
+    maze = [list(row) for row in [
+        "######################",
+        "#       #           ##",
+        "# #### # ##### ##### #",
+        "#    # #     #     # #",
+        "# # ## # ### ##### # #",
+        "# # ## #     #     # #",
+        "# # ## ##### ####### #",
+        "# #           #      #",
+        "####### ########## ###",
+        "#                   ##",
+        "######################"
+    ]]
+Copy<br>Kein Weg gefunden von (1, 15) nach (9, 17)
+Weg gefunden von (1, 2) nach (9, 17)
+Copy<br><img alt="png" src="aufgabenblatt08/aufgabenblatt08_files/aufgabenblatt08_13_1.png"><br><br>def test_mazes(mazes, starts_ends_list):
+    results = []
+    for maze, starts_ends in zip(mazes, starts_ends_list):
+        original_maze = [list(row) for row in maze]
+        for start, end in starts_ends:
+            path = []
+            maze = [row[:] for row in original_maze]
+            if dfs(maze, *start, *end, path):
+                results.append((start, end, True))
+            else:
+                results.append((start, end, False))
+    return results
+
+mazes = [
+    [
+        "###############",
+        "#             #",
+        "# ##### #######",
+        "# #   #       #",
+        "# # # ####### #",
+        "# # #       # #",
+        "# # ####### # #",
+        "# #       # # #",
+        "# ######### # #",
+        "#           # #",
+        "# ########### #",
+        "#             #",
+        "# #############",
+        "#             #",
+        "###############"
+    ],
+    [
+        "###############",
+        "#             #",
+        "# ##### ##### #",
+        "# #   #     # #",
+        "# # ### ### # #",
+        "# # #       # #",
+        "# # # ##### # #",
+        "# # # #   # # #",
+        "# # # # # ### #",
+        "# # # # #     #",
+        "# # # # #######",
+        "# #     #     #",
+        "# ########### #",
+        "#             #",
+        "###############"
+    ]
+]
+
+starts_ends_list = [
+    [((1, 1), (13, 13)), ((1, 13), (13, 1))],
+    [((1, 1), (13, 13)), ((1, 13), (13, 1))]
+]
+
+test_results = test_mazes(mazes, starts_ends_list)
+
+for result in test_results:
+    print(f"Path from {result[0]} to {result[1]} found: {result[2]}")
+    
+Copy<br>Path from (1, 1) to (13, 13) found: True
+Path from (1, 13) to (13, 1) found: True
+Path from (1, 1) to (13, 13) found: True
+Path from (1, 13) to (13, 1) found: True
+Copy]]></description><link>aufgabenblatt08/aufgabenblatt08.html</link><guid isPermaLink="false">Aufgabenblatt08/Aufgabenblatt08.md</guid><pubDate>Mon, 04 Nov 2024 07:10:16 GMT</pubDate><enclosure url="data:image/png;base64,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QhkAAABCKAMAAEAIZQAAAAihDAAAACGUAQAAIIQyAAAAhFAGAACAEMoAAAAQQhkAAABCKAMAAEAIZQAAAAihDAAAACGUAQAAIIQyAAAAhFAGAACAEMoAAAAQQhkAAABCKAMAAEAIZQAAAAihDAAAACGUAQAAIIQyAAAAhFAGAACAEMoAAAAQQhkAAABCKAMAAEAIZQAAAAihDAAAACGUAQAAIIQyAAAAhFAGAACAEMoAAAAQQhkAAABCKAMAAEAIZQAAAAihDAAAACGUAQAAIIQyAAAAhFAGAACAEMoAAAAQQhkAAABCKAMAAEAIZQAAAAihDAAAACGUAQAAIIQyAAAAhFAGAACAEMoAAAAQQhkAAABCKAMAAEAIZQAAAAihDAAAACGUAQAAIIQyAAAAhFAGAACAEMoAAAAQQhkAAABCKAMAAEAIZQAAAAihDAAAACGUAQAAIIQyAAAAhFAGAACAEMoAAAAQQhkAAABCKAMAAEAIZQAAAAihDAAAACGUAQAAIIQyAAAAhFAGAACAEMoAAAAQQhkAAABCKAMAAEAIZQAAAAihDAAAACGUAQAAIIQyAAAAhFAGAACAEMoAAAAQQhkAAABCKAMAAEAIZQAAAAihDAAAACGUAQAA4D/L8i+wbvnTjvuctwAAAABJRU5ErkJggg==" length="0" type="false"/><content:encoded>&lt;figure&gt;&lt;img src=&quot;data:image/png;base64,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QhkAAABCKAMAAEAIZQAAAAihDAAAACGUAQAAIIQyAAAAhFAGAACAEMoAAAAQQhkAAABCKAMAAEAIZQAAAAihDAAAACGUAQAAIIQyAAAAhFAGAACAEMoAAAAQQhkAAABCKAMAAEAIZQAAAAihDAAAACGUAQAAIIQyAAAAhFAGAACAEMoAAAAQQhkAAABCKAMAAEAIZQAAAAihDAAAACGUAQAAIIQyAAAAhFAGAACAEMoAAAAQQhkAAABCKAMAAEAIZQAAAAihDAAAACGUAQAAIIQyAAAAhFAGAACAEMoAAAAQQhkAAABCKAMAAEAIZQAAAAihDAAAACGUAQAAIIQyAAAAhFAGAACAEMoAAAAQQhkAAABCKAMAAEAIZQAAAAihDAAAACGUAQAAIIQyAAAAhFAGAACAEMoAAAAQQhkAAABCKAMAAEAIZQAAAAihDAAAACGUAQAAIIQyAAAAhFAGAACAEMoAAAAQQhkAAABCKAMAAEAIZQAAAAihDAAAACGUAQAAIIQyAAAAhFAGAACAEMoAAAAQQhkAAABCKAMAAEAIZQAAAAihDAAAACGUAQAAIIQyAAAAhFAGAACAEMoAAAAQQhkAAABCKAMAAEAIZQAAAAihDAAAACGUAQAA4D/L8i+wbvnTjvuctwAAAABJRU5ErkJggg==&quot;&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[Tutorium Programmieren (Prof. Dr. Ralf Gerlich)]]></title><description><![CDATA[ 
+ <br><br><br>Hinweis: Die Lösungen der Aufgaben in diesem Aufgabenblatt werden im folgenden Aufgabenblatt erweitert.<br>Definieren Sie eine Klasse Person und eine Klasse Personendatenbank mit geeigneten Konstruktoren. Die Felder der Objekte dieser Klassen sollen mit der Notation objekt.name usw. lesbar, aber vor Schreibzugriff von außen geschützt sein.<br>Eine Person soll einen Nach- und Vornamen sowie ein Geburtsdatum haben. Implementieren Sie eine Methode __str__, die einen String mit einer gefälligen Darstellung mit Name, Vorname und Geburtsdatum zurückliefert. Für das Datum nutzen Sie die <a data-tooltip-position="top" aria-label="https://docs.python.org/3/library/datetime.html#datetime.date" rel="noopener nofollow" class="external-link" href="https://docs.python.org/3/library/datetime.html#datetime.date" target="_blank">Klasse <code></code> aus der <code></code>-Bibliothek</a>datedatetime.<br>Eine Personendatenbank soll eine Liste von Personen enthalten. Die Liste soll von außen les-, aber nicht schreibbar sein.<br>Über die genannten Felder hinaus können Sie den Objekten zusätzliche Felder hinzufügen, die jedoch von außen nicht les- oder schreibbar sein dürfen.<br>Implementieren Sie für die Personendatenbank die folgenden Methoden:<br>
+<br>leeren: Leert die Liste der Personen.
+<br>einfügen(person): Fügt das Personenobjekt person hinten an die Liste der Personen an. 
+<br>lade(datei): Fügt die Einträge aus dem Dateiobjekt datei der Datenbank hinzu.
+<br>speichere(datei): Speichert alle Einträge in der Personendatenbank in das Dateiobjekt datei, und zwar so, dass sie mit lade wieder geladen werden können.
+<br>findePerson(name, vorname): Liefert das Personenobjekt aus der Datenbank, dessen Name und Vorname den Strings name und vorname entsprechen. Wenn keine solche Person existiert, soll None zurückgegeben werden.
+<br>Schreiben Sie in Jupyter ein Hauptprogramm, das die Verwaltung und Nutzung dieser Datenbank mit der folgenden Funktionalität erlaubt:<br>
+<br>Datenbank laden
+<br>Datenbank speichern
+<br>Person hinzufügen
+<br>Person suchen
+<br>Implementieren Sie eine Hauptschleife, das ein entsprechendes Menü präsentiert, nach einer Auswahl fragt und dann die entsprechende Funktionalität ausführt, mit allen erforderlichen Nachfragen beim Nutzer oder der Nutzerin.<br>Testen Sie das Programm.<br>from datetime import date
+from typing import List
+import os
+
+
+class Person:
+    def __init__(self, nachname, vorname, geburtsdatum):
+        self._nachname: str = nachname
+        self._vorname: str = vorname
+        self._geburtsdatum: date = geburtsdatum
+
+    def __str__(self):
+        return f"{self.vorname} {self.nachname}, {self.geburtsdatum}"
+
+    @property
+    def nachname(self):
+        return self._nachname
+
+    @property
+    def vorname(self):
+        return self._vorname
+
+    @property
+    def geburtsdatum(self):
+        return self._geburtsdatum
+
+
+class Personendatenbank:
+    def __init__(self, personen):
+        self._personen: List[Person] = personen
+
+    def leeren(self):
+        self._personen = []
+
+    def einfügen(self, person):
+        self._personen.append(person)
+
+    def lade(self, datei):
+        self._personen = []
+        for l in datei.readlines():
+            temp = l.split("$")
+            self._personen.append(Person(temp[0], temp[1], temp[2]))
+
+    def speichere(self, datei):
+        for p in self.personen:
+            datei.write(f"{p.nachname}${p.vorname}${p.geburtsdatum}$\n")
+
+    def findePerson(self, name, vorname):
+        for p in self.personen:
+            if p.nachname.lower() == name.lower():
+                if p.vorname.lower() == vorname.lower():
+                    return p
+        return None
+
+    @property
+    def personen(self):
+        return self._personen
+
+
+pdb = Personendatenbank([])
+
+while True:
+    action = int(
+        input(
+            """
+        Guten Tag. Hier können sie ihre Mitarbeiter/Klienten/Sonstiges verwalten. Wählen sie eine Aktion aus!
+        0 =&gt; Programm verlassen
+        1 =&gt; Datenbank leeren
+        2 =&gt; Person einfügen
+        3 =&gt; Datenbank aus Datei laden
+        4 =&gt; Datenbank in Datei speichern
+        5 =&gt; Person finden
+        """
+        )
+    )
+    match action:
+        case 0:
+            break
+        case 1:
+            pdb.leeren()
+            continue
+        case 2:
+            name = input("Nachname: \n")
+            vorname = input("Vorname: \n")
+            geburtsdatum = input("Geburtsdatum: \n")
+            pdb.einfügen(Person(name, vorname, geburtsdatum))
+            continue
+        case 3:
+            pfad = input("Welche Datei wollen sie laden?\n")
+            if not os.path.isfile(pfad):
+                print("Tut uns leid, diese Datei existiert nicht.\n")
+                continue
+            dbfile = open(pfad, "r")
+            pdb.lade(dbfile)
+            continue
+        case 4:
+            pfad = input("Wie soll die Datei heißen?\n")
+            dbfile = open(pfad, "w")
+            pdb.speichere(dbfile)
+            continue
+        case 5:
+            name = input("Wie heißt ihre Person zum Nachnamen?\n")
+            vorname = input("Und zum Vornamen?\n")
+            person = pdb.findePerson(name, vorname)
+            if person == None:
+                print(
+                    "Tut uns leid, diese Person existiert nicht in unserer Datenbank."
+                )
+                continue
+            print(person.__str__())
+            continue
+
+Copy]]></description><link>aufgabenblatt09/aufgabenblatt09.html</link><guid isPermaLink="false">Aufgabenblatt09/Aufgabenblatt09.md</guid><pubDate>Mon, 04 Nov 2024 07:10:17 GMT</pubDate></item><item><title><![CDATA[Aufgabenblatt10]]></title><description><![CDATA[ 
+ <br># Tutorium Programmieren (Prof. Dr. Ralf Gerlich)
+# Aufgabenblatt 10: Personaldatenbank (Fortsetzung)
+**Hinweis**: Für dieses Aufgabenblatts benötigen Sie Ihre Lösung vom vorangegangenen Aufgabenblatt als Grundlage. Die Lösungen der Aufgaben in diesem Aufgabenblatt werden im folgenden Aufgabenblatt erweitert.
+Copy<br><br>Die Funktion sorted erwartet eine Sequenz von Einträgen und liefert eine Liste zurück, die die Einträge in sortierter Reihenfolge enthält.<br>Probieren Sie es selbst:<br>l = [5,2,7,19,3]
+sorted(l)
+Copy<br>[2, 3, 5, 7, 19]
+Copy<br>Auch eine umgekehrte Sortierung ist durch Angabe von reverse=True möglich:<br>l = [5,2,7,19,3]
+sorted(l, reverse=True)
+Copy<br>[19, 7, 5, 3, 2]
+Copy<br>sorted nutzt dabei standardmäßig den &lt;=-Operator, um die Objekte miteinander zu vergleichen. Steht ein solcher für die zu sortierenden Objekte nicht zur Verfügung oder soll eine andere als die standardmäßige Sortierung verwendet werden, so kann eine key-Funktion angegeben werden, die ein Objekt zurückliefert, nach dem sortiert werden soll.<br>Beispiel: Wir wollen Winkel nach ihrem Sinus-Wert sortieren:<br>from math import pi, sin
+angles = [pi/2, 0, 3*pi/2]
+sorted(angles, key=sin)
+Copy<br>[4.71238898038469, 0, 1.5707963267948966]
+Copy<br>Klassenmethoden können auch als Sortierfunktionen verwendet werden:<br>from math import sqrt
+class Vector:
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+    def length(self):
+        return sqrt(self.x**2+self.y**2)
+
+    def __repr__(self):
+        return f"Vector(x={self.x}, y={self.y})"
+
+vectors = [Vector(1,1), Vector(2,0), Vector(0,-1)]
+sorted(vectors, key=Vector.length)
+Copy<br>[Vector(x=0, y=-1), Vector(x=1, y=1), Vector(x=2, y=0)]
+Copy<br><br>Ergänzen Sie die Klasse Person um eine Funktion nächster_geburtstag. Diese soll das Datum zurückliefern, an dem die Person zum nächsten Mal Geburtstag hat.<br>Hinweise:<br>
+<br>Um das heutige Datum zu ermitteln, können Sie die <a data-tooltip-position="top" aria-label="https://docs.python.org/3/library/datetime.html#datetime.date.today" rel="noopener nofollow" class="external-link" href="https://docs.python.org/3/library/datetime.html#datetime.date.today" target="_blank">Funktion <code></code> aus der <code></code>-Bibliothek</a>date.today()datetime verwenden.
+<br>date-Objekte können direkt per Vergleichsoperatoren &lt;,  &lt;=,  &gt;= und &gt; sowie == und != miteinander verglichen werden. Dafür implementiert die Klasse datetime.date eine <a data-tooltip-position="top" aria-label="https://docs.python.org/3/reference/datamodel.html#object.__lt__" rel="noopener nofollow" class="external-link" href="https://docs.python.org/3/reference/datamodel.html#object.__lt__" target="_blank">Reihe von speziellen Methoden</a>.
+<br>from datetime import date
+from typing import List
+import os
+
+
+class Person:
+    def __init__(self, nachname, vorname, geburtsdatum):
+        self._nachname: str = nachname
+        self._vorname: str = vorname
+        self._geburtsdatum: date = geburtsdatum
+        self._nächster_geburtstag: date = self.rechne_naechsten_geburtstag(geburtsdatum)
+
+    def rechne_naechsten_geburtstag(geburtstag):
+        if geburtstag &gt; date.today():
+            return geburtstag
+        else:
+            return geburtstag.replace(year=date.today().year + 1)
+
+    def __str__(self):
+        return f"{self.vorname} {self.nachname}, {self.geburtsdatum}"
+
+    @property
+    def nachname(self):
+        return self._nachname
+
+    @property
+    def vorname(self):
+        return self._vorname
+
+    @property
+    def geburtsdatum(self):
+        return self._geburtsdatum
+
+
+class Personendatenbank:
+    def __init__(self, personen):
+        self._personen: List[Person] = personen
+
+    def leeren(self):
+        self._personen = []
+
+    def einfügen(self, person):
+        self._personen.append(person)
+
+    def lade(self, datei):
+        self._personen = []
+        for l in datei.readlines():
+            temp = l.split("$")
+            self._personen.append(Person(temp[0], temp[1], temp[2]))
+
+    def speichere(self, datei):
+        for p in self.personen:
+            datei.write(f"{p.nachname}${p.vorname}${p.geburtsdatum}$\n")
+
+    def findePerson(self, name, vorname):
+        for p in self.personen:
+            if p.nachname.lower() == name.lower():
+                if p.vorname.lower() == vorname.lower():
+                    return p
+        return None
+
+    @property
+    def personen(self):
+        return self._personen
+
+
+pdb = Personendatenbank([])
+
+while True:
+    action = int(
+        input(
+            """
+        Guten Tag. Hier können sie ihre Mitarbeiter/Klienten/Sonstiges verwalten. Wählen sie eine Aktion aus!
+        0 =&gt; Programm verlassen
+        1 =&gt; Datenbank leeren
+        2 =&gt; Person einfügen
+        3 =&gt; Datenbank aus Datei laden
+        4 =&gt; Datenbank in Datei speichern
+        5 =&gt; Person finden
+        """
+        )
+    )
+    match action:
+        case 0:
+            break
+        case 1:
+            pdb.leeren()
+            continue
+        case 2:
+            name = input("Nachname: \n")
+            vorname = input("Vorname: \n")
+            geburtsdatum = input("Geburtsdatum: \n")
+            pdb.einfügen(Person(name, vorname, geburtsdatum))
+            continue
+        case 3:
+            pfad = input("Welche Datei wollen sie laden?\n")
+            if not os.path.isfile(pfad):
+                print("Tut uns leid, diese Datei existiert nicht.\n")
+                continue
+            dbfile = open(pfad, "r")
+            pdb.lade(dbfile)
+            continue
+        case 4:
+            pfad = input("Wie soll die Datei heißen?\n")
+            dbfile = open(pfad, "w")
+            pdb.speichere(dbfile)
+            continue
+        case 5:
+            name = input("Wie heißt ihre Person zum Nachnamen?\n")
+            vorname = input("Und zum Vornamen?\n")
+            person = pdb.findePerson(name, vorname)
+            if person == None:
+                print(
+                    "Tut uns leid, diese Person existiert nicht in unserer Datenbank."
+                )
+                continue
+            print(person.__str__())
+            continue
+
+Copy<br><br>Ergänzen Sie die Klasse Personendatenbank um eine Funktion nächste_geburtstage. Diese soll die Liste aller Personen zurückliefern, aber aufsteigend nach dem nächsten Geburtstag sortiert.<br>Ergänzen Sie dann Ihr Programm aus dem letzten Arbeitsblatt um eine Menüoption, mit der die fünf Personen ausgegeben werden können, die als nächstes Geburtstag haben. Die Reihenfolge soll dabei der Reihenfolge der Geburtstage entsprechen. Geben Sie zusätzlich das Alter aus, dass die Personen zu diesem Zeitpunkt erreicht haben werden.<br>Berücksichtigen Sie auch den Fall, in dem weniger als fünf Personen in Ihrer Datenbank enthalten sind.<br>from datetime import date
+from typing import List
+import os
+
+
+class Person:
+    def __init__(self, nachname, vorname, geburtsdatum):
+        self._nachname: str = nachname
+        self._vorname: str = vorname
+        self._geburtsdatum: date = geburtsdatum
+        self._naechster_geburtstag: date = self.rechne_naechsten_geburtstag(
+            geburtsdatum
+        )
+
+    def rechne_naechsten_geburtstag(geburtstag):
+        if geburtstag &gt; date.today():
+            return geburtstag
+        else:
+            return geburtstag.replace(year=date.today().year + 1)
+
+    def __str__(self):
+        return f"{self.vorname} {self.nachname}, {self.geburtsdatum}"
+
+    @property
+    def nachname(self):
+        return self._nachname
+
+    @property
+    def vorname(self):
+        return self._vorname
+
+    @property
+    def geburtsdatum(self):
+        return self._geburtsdatum
+
+    @property
+    def naechster_geburtstag(self):
+        return self._naechster_geburtstag
+
+
+class Personendatenbank:
+    def __init__(self, personen):
+        self._personen: List[Person] = personen
+
+    def leeren(self):
+        self._personen = []
+
+    def einfügen(self, person):
+        self._personen.append(person)
+
+    def lade(self, datei):
+        self._personen = []
+        for l in datei.readlines():
+            temp = l.split("$")
+            self._personen.append(Person(temp[0], temp[1], temp[2]))
+
+    def speichere(self, datei):
+        for p in self.personen:
+            datei.write(f"{p.nachname}${p.vorname}${p.geburtsdatum}$\n")
+
+    def findePerson(self, name, vorname):
+        for p in self.personen:
+            if p.nachname.lower() == name.lower():
+                if p.vorname.lower() == vorname.lower():
+                    return p
+        return None
+
+    def naechste_geburtstage(self):
+        return sorted(self.personen, key=self.personen.naechster_geburtstag)
+
+    @property
+    def personen(self):
+        return self._personen
+
+
+pdb = Personendatenbank([])
+
+while True:
+    action = int(
+        input(
+            """
+        Guten Tag. Hier können sie ihre Mitarbeiter/Klienten/Sonstiges verwalten. Wählen sie eine Aktion aus!
+        0 =&gt; Programm verlassen
+        1 =&gt; Datenbank leeren
+        2 =&gt; Person einfügen
+        3 =&gt; Datenbank aus Datei laden
+        4 =&gt; Datenbank in Datei speichern
+        5 =&gt; Person finden
+        6 =&gt; (max.) 5 nächste Geburtstagskinder auflisten
+        """
+        )
+    )
+    match action:
+        case 0:
+            break
+        case 1:
+            pdb.leeren()
+            continue
+        case 2:
+            name = input("Nachname: \n")
+            vorname = input("Vorname: \n")
+            geburtsdatum = input("Geburtsdatum: \n")
+            pdb.einfügen(Person(name, vorname, geburtsdatum))
+            continue
+        case 3:
+            pfad = input("Welche Datei wollen sie laden?\n")
+            if not os.path.isfile(pfad):
+                print("Tut uns leid, diese Datei existiert nicht.\n")
+                continue
+            dbfile = open(pfad, "r")
+            pdb.lade(dbfile)
+            continue
+        case 4:
+            pfad = input("Wie soll die Datei heißen?\n")
+            dbfile = open(pfad, "w")
+            pdb.speichere(dbfile)
+            continue
+        case 5:
+            name = input("Wie heißt ihre Person zum Nachnamen?\n")
+            vorname = input("Und zum Vornamen?\n")
+            person = pdb.findePerson(name, vorname)
+            if person == None:
+                print(
+                    "Tut uns leid, diese Person existiert nicht in unserer Datenbank."
+                )
+                continue
+            print(person.__str__())
+            continue
+        case 6:
+            i = 0
+            for p in self.naechste_geburtstage:
+                i += 1
+                print(p.__str__())
+                print(
+                    f"{p.vorname} wird ganze {p.naechster_geburtstag - p.geburtsdatum} Jahre alt!"
+                )
+
+Copy<br><br>Setzen Sie ein Projekt in PyCharm auf, in dem Ihr Personaldatenbank-Programm auch außerhalb von Jupyter ausgeführt werden kann. Lagern Sie die Klassen dabei in ein Modul personendatenbank aus. Das Hauptprogramm soll in einem gesonderten Modul hauptprogramm enthalten sein.<br>Testen Sie, ob Ihr Programm noch korrekt funktioniert.]]></description><link>aufgabenblatt10/aufgabenblatt10.html</link><guid isPermaLink="false">Aufgabenblatt10/Aufgabenblatt10.md</guid><pubDate>Mon, 04 Nov 2024 07:10:17 GMT</pubDate></item><item><title><![CDATA[Tutorium Programmieren (Prof. Dr. Ralf Gerlich)]]></title><description><![CDATA[ 
+ <br><br><br>Hinweis: Für dieses Aufgabenblatt benötigen Sie Ihre Lösung vom vorangegangenen Aufgabenblatt als Grundlage.<br><br>Ergänzen Sie die Methode einfügen in der Klasse Personendatenbank so, dass eine Exception vom Typ ValueError ausgelöst wird, wenn eine Person gleichen Namens und Vornamens schon in der Datenbank enthalten ist.<br><br>Implementieren Sie Unit-Tests mit pytest für die Methoden:<br>
+<br>Person.nächster_geburtstag
+<br>Personendatenbank.einfügen
+<br>Personendatenbank.nächste_geburtstage
+<br>Überlegen Sie sich anhand Ihres Codes, welche unterschiedlichen Fälle relevant sein könnten und implementieren Sie die entsprechenden Tests. Testen Sie Ihr Modul mit diesen Tests.<br>Messen Sie die Coverage mit pytest-cov (<a data-tooltip-position="top" aria-label="https://pytest-cov.readthedocs.io/en/latest/readme.html#installation" rel="noopener nofollow" class="external-link" href="https://pytest-cov.readthedocs.io/en/latest/readme.html#installation" target="_blank">Installationshinweise</a>, <a data-tooltip-position="top" aria-label="https://pytest-cov.readthedocs.io/en/latest/readme.html#usage" rel="noopener nofollow" class="external-link" href="https://pytest-cov.readthedocs.io/en/latest/readme.html#usage" target="_blank">Nutzungshinweise</a>).]]></description><link>aufgabenblatt11/aufgabenblatt11.html</link><guid isPermaLink="false">Aufgabenblatt11/Aufgabenblatt11.md</guid><pubDate>Mon, 04 Nov 2024 08:28:40 GMT</pubDate></item><item><title><![CDATA[index]]></title><description><![CDATA[ 
+ <br>Hier die Dokumentation für alle Aufgaben im Praktikum Programmieren.]]></description><link>index.html</link><guid isPermaLink="false">index.md</guid><pubDate>Mon, 04 Nov 2024 07:54:38 GMT</pubDate></item></channel></rss>
