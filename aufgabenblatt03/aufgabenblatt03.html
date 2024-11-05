@@ -110,9 +110,9 @@ password <span class="token operator">=</span> getpass<span class="token punctua
     out <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>
     <span class="token keyword">for</span> i <span class="token keyword">in</span> <span class="token builtin">range</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">13</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">:</span>
         <span class="token keyword">if</span> i <span class="token operator">%</span> <span class="token number">2</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">:</span>
-            out<span class="token punctuation">.</span>append<span class="token punctuation">(</span>code<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">*</span> <span class="token number">3</span><span class="token punctuation">)</span>
+            out<span class="token punctuation">.</span>append<span class="token punctuation">(</span>code<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>
             <span class="token keyword">continue</span>
-        out<span class="token punctuation">.</span>append<span class="token punctuation">(</span>code<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">)</span>
+        out<span class="token punctuation">.</span>append<span class="token punctuation">(</span>code<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">*</span> <span class="token number">3</span><span class="token punctuation">)</span>
     x <span class="token operator">=</span> <span class="token number">0</span>
     <span class="token keyword">for</span> i <span class="token keyword">in</span> out<span class="token punctuation">:</span>
         x <span class="token operator">+=</span> i
