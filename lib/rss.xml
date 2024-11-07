@@ -1,4 +1,172 @@
-<?xml version="1.0" encoding="UTF-8"?><rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Programmieren Dokumentation]]></title><description><![CDATA[Obsidian digital garden]]></description><link>http://github.com/dylang/node-rss</link><image><url>lib/media/favicon.png</url><title>Programmieren Dokumentation</title><link></link></image><generator>Webpage HTML Export plugin for Obsidian</generator><lastBuildDate>Tue, 05 Nov 2024 11:17:36 GMT</lastBuildDate><atom:link href="lib/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Tue, 05 Nov 2024 11:17:32 GMT</pubDate><ttl>60</ttl><dc:creator></dc:creator><item><title><![CDATA[Tutorium Programmieren (Prof. Dr. Ralf Gerlich)]]></title><description><![CDATA[ 
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Programmieren Dokumentation]]></title><description><![CDATA[Obsidian digital garden]]></description><link>http://github.com/dylang/node-rss</link><image><url>lib/media/favicon.png</url><title>Programmieren Dokumentation</title><link/></image><generator>Webpage HTML Export plugin for Obsidian</generator><lastBuildDate>Thu, 07 Nov 2024 13:38:45 GMT</lastBuildDate><atom:link href="lib/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Thu, 07 Nov 2024 13:38:42 GMT</pubDate><ttl>60</ttl><dc:creator/><item><title><![CDATA[Tutorium Programmieren (Prof. Dr. Ralf Gerlich)]]></title><description><![CDATA[ 
+ <br><br><br><br>Leonardo da Pisa (Beiname: "figlio de Bonacci", "Sohn des Bonacci") untersuchte im dreizehnten Jahrhundert das Wachstum einer Kaninchenpopulation.<br>
+Das Ergebnis war die sogenannte <a data-tooltip-position="top" aria-label="https://de.wikipedia.org/wiki/Fibonacci-Folge" rel="noopener nofollow" class="external-link" href="https://de.wikipedia.org/wiki/Fibonacci-Folge" target="_blank">Fibonacci-Folge</a>: 1, 1, 2, 3, 5, 8, 13, ...<br>Die Folge erhält man, indem man die ersten zwei Elemente der Folge auf 1 setzt und die jeweils nachfolgenden Elemente als die Summe Ihrer zwei Vorgänger berechnet: 1, 1, 1+1=2, 1+2=3, 2+3=5, 3+5=8, 5+8=13, ...<br>Das k-te-Element der Folge gibt an, wie Kaninchenpaare im Monat k vorhanden sind, wenn jedes Kaninchenpaar jeden Monat ein weiteres Kaninchenpaar zur Welt bringt, aber die Kaninchen erst nach zwei Monaten geschlechtsreif sind.<br>Unabhängig davon, wie realistisch diese Annahmen sind, hat die Folge eine interessante mathematische Eigenschaft: Der Quotient aus einem Element der Folge und seinem Vorgänger strebt gegen den sogenannten <a data-tooltip-position="top" aria-label="https://de.wikipedia.org/wiki/Goldener_Schnitt" rel="noopener nofollow" class="external-link" href="https://de.wikipedia.org/wiki/Goldener_Schnitt" target="_blank">Goldenen Schnitt</a>: .<br>Überzeugen Sie sich davon, indem Sie die ersten 20 Werte der Fibonacci-Folge berechnen und ausgeben. Geben Sie zusätzlich jeweils den Quotienten der jeweils zwei letzten Wert aus.<br>Die Ausgabe sollte so aussehen:<br>f_3 = 2 2.000000000000000
+f_4 = 3 1.500000000000000
+f_5 = 5 1.666666666666667
+f_6 = 8 1.600000000000000
+f_7 = 13 1.625000000000000
+f_8 = 21 1.615384615384615
+f_9 = 34 1.619047619047619
+f_10 = 55 1.617647058823529
+f_11 = 89 1.618181818181818
+f_12 = 144 1.617977528089888
+f_13 = 233 1.618055555555556
+f_14 = 377 1.618025751072961
+f_15 = 610 1.618037135278515
+f_16 = 987 1.618032786885246
+f_17 = 1597 1.618034447821682
+f_18 = 2584 1.618033813400125
+f_19 = 4181 1.618034055727554
+f_20 = 6765 1.618033963166706
+<br>def fibonacci(x):
+    if (x == 1) or (x == 2):
+        return 1
+    return fibonacci(x - 1) + fibonacci(x - 2)
+
+
+for i in range(3, 24, 1):
+    print(
+        "f_"
+        + str(i)
+        + " = "
+        + str(fibonacci(i))
+        + " "
+        + str(fibonacci(i) / fibonacci(i - 1))
+    )
+
+<br><br>Bubble-Sort ist ein Sortieralgorithmus, bei dem die Einträge in einer Liste so lange paarweise vertauscht werden, bis die Reihenfolge korrekt ist. Stellt man sich die zu sortierende Liste als Säule vor, so kann man sich vorstellen, dass die größten/kleinsten Einträge Schritt für Schritt wie eine Luftblase (engl. "bubble") nach oben steigen.<br>
+<br>Beim Bubble-Sort wird die zu sortierende Liste wiederholt von vorne nach hinten durchlaufen.
+<br>Ist ein Element der Liste größer als sein Nachfolger, so wird dass Element mit seinem Nachfolger vertauscht.
+<br>Dies wird so lange wiederholt, bis kein Tausch mehr erforderlich ist.
+<br>Aufgrund seiner Eigenschaften lässt sich Bubble-Sort als sogenannter In-Place-Sortieralgorithmus implementieren, da statt der Erstellung einer komplett neuen Liste auch die bestehende Liste einfach modifiziert werden kann. Das Ergebnis wird also an der Stelle gespeichert, an dem auch die Eingabe lag ("in place").<br>Implementieren Sie den Bubble-Sort in Python. Der folgende Code kann dafür verwendet werden, eine zufällige Folge von Zahlen zwischen 0 und 999 zu erstellen:<br>import random
+
+
+def bubble_sort(x):
+    while True:
+        possibly_sorted = True
+        for i in range(0, len(x), 1):
+            temp = 0
+            if i &lt; len(x) - 1:
+                if x[i] &gt; x[i + 1]:
+                    possibly_sorted = False
+                    temp = x[i]
+                    x[i] = x[i + 1]
+                    x[i + 1] = temp
+        if possibly_sorted:
+            return x
+
+
+random.seed()
+numbers = [random.randint(0, 999) for i in range(10)]
+print("Unsorted:")
+for i in numbers:
+    print(i)
+print("Sorted:")
+for i in bubble_sort(numbers):
+    print(i)
+
+<br><br>Als Anlage zu diesem Übungsblatt finden Sie die Datei StarTrekTNG.csv aus der Vorlesung, die eine Liste der Episoden der Science-Fiction-Serie "Star Trek: Die nächste Generation" enthält. Hier ein Ausschnitt der Datei:<br>Titel;Staffel;Episode;Disk
+Encounter at Farpoint;1;01/02;1
+The Naked Now;1;03;1
+...
+<br>Schreiben Sie ein Programm, das alle Folgen ausgibt, die ein vom Nutzer oder der Nutzerin vorgegebenes Textfragment im Titel enthalten. Das Programm sollte<br>
+<br>die Datei einlesen,
+<br>Nutzer oder Nutzerin nach einem Titelfragment fragen und
+<br>alle Episoden ausgeben, deren Titel das Fragment enthalten, inklusive Staffel-, Epsioden- und Disk-Nummer.
+<br>Die Felder sollen in geeigneter Weise formatiert werden.<br>Hinweise:<br>
+<br>Staffel- und Disk-Nummern müssen ggf. in Zahlen umgewandelt werden.
+<br>Episoden-Nummern sind nicht immer Zahlen (z.B. "01/02" für Doppelfolgen).
+<br>Nutzen Sie den in-Operator, um auf das Vorhandensein eines Titelfragments zu prüfen.
+<br>Groß- und Kleinschreibung sollen ignoriert werden sein, d.h. die Episode "The Naked Now" sollte auch aufgelistet werden, wenn der Suchstring "naked" (klein geschrieben) lautet. Sie können den Ausdruck s.lower() verwenden, um den String s in Kleinbuchstaben zu verwandeln.
+<br>from dataclasses import dataclass
+
+
+@dataclass
+class Episode:
+    title: str
+    season: int
+    episode_nr: str
+    disk: int
+
+
+file = open("StarTrekTNG.csv", "r")
+episodes = []
+for l in file.readlines()[1::]:
+    e = l.split(";")
+    episodes.append(Episode(e[0], int(e[1]), e[2], int(e[3])))
+
+fragment = input("Nach welcher Folge soll gesucht werden?\n")
+candidates = []
+for e in episodes:
+    if fragment.lower() in e.title.lower():
+        candidates.append(e)
+if candidates == []:
+    print("Es konnten keine passenden Titel gefunden werden!")
+for c in candidates:
+    print(
+        "Titel:
+        {c.title}
+        \n
+        Staffel: 
+        {str(c.season)}
+        \n
+        Folge: 
+        {c.episode_nr}
+        \n
+        Disk: 
+        {c.disk}
+        \n\n"
+    )
+
+file.close()
+
+
+<br><br>Schreiben Sie ein Programm, das eine Liste mit Namen und Telefonnummern verwaltet. Die Liste soll in einer Datei gespeichert werden.<br>Zum Start soll das Programm fragen, ob ein Eintrag hinzugefügt oder gesucht werden soll.<br>Soll ein Eintrag gesucht werden, so soll nach einem Suchtext gefragt werden und alle Einträge ausgegeben werden, deren Namen den Suchtext enthalten. Hier soll Groß- und Kleinschreibung irrelevant sein.<br>Soll ein Eintrag hinzugefügt werden, so soll nach dem Namen und der Telefonnummer gefragt werden. Fügen Sie den neuen Eintrag der Liste von Einträgen hinzu und schreiben Sie die Datenbankdatei neu so, dass alle Einträge inklusive des neuen Eintrags darin enthalten sind.<br>Sie können das Programm mit fiktiven Namen und Telefonnummern testen.<br>from dataclasses import dataclass
+import os.path
+
+
+@dataclass(unsafe_hash=True)
+class Entry:
+    name: str
+    number: str
+
+
+entries = []
+if os.path.isfile("book.db"):
+    book = open("book.db", "r")
+else:
+    book = open("book.db", "x")
+
+for e in book:
+    e = e.split("$")
+    entries.append(Entry(e[0], e[1]))
+book.close()
+
+action = int(
+    input(
+        "Soll ein neuer Eintrag gemacht werden (1) oder nach einer Telefonnummer gesucht werden (2)?\n"
+    )
+)
+match action:
+    case 1:
+        entries.append(Entry(input("Name: \n"), input("Nummer: \n")))
+    case 2:
+        fragment = input("Name:\n")
+        candidates = []
+        for e in entries:
+            if fragment.lower() in e.name.lower():
+                candidates.append(e)
+        if candidates == []:
+            print("Es konnten keine passenden Einträge gefunden werden!")
+        for c in candidates:
+            print("Name: " + c.name + "\n" + "Nummer: " + c.number + "\n\n")
+
+book = open("book.db", "w")
+book.writelines(f"{e.name}${e.number}\n" for e in list(set(entries)))
+
+book.close()
+
+]]></description><link>aufgabenblatt04/aufgabenblatt04.html</link><guid isPermaLink="false">Aufgabenblatt04/Aufgabenblatt04.md</guid><pubDate>Thu, 07 Nov 2024 13:38:02 GMT</pubDate></item><item><title><![CDATA[Tutorium Programmieren (Prof. Dr. Ralf Gerlich)]]></title><description><![CDATA[ 
  <br><br><br><br>Wir repräsentieren Vektoren im mehrdimensionalen Raum als Tupel. So können wir zum Beispiel (1.0, 2.5, 3.0) als dreidimensionalen Vektor interpretieren.<br>Implementieren Sie die folgenden Vektorfunktionen:<br>
 <br>vektor_summe: vektor_summe(a,b) soll die Summe der Vektoren a und b zurückliefern
 <br>skalar_produkt: skalar_produkt(a,b) soll das Skalarprodukt der Vektoren a und b zurückliefern
@@ -114,171 +282,6 @@ if validate_code(code):
 else:
     print("Dieser Code ist nicht valide")
 Copy]]></description><link>aufgabenblatt03/aufgabenblatt03.html</link><guid isPermaLink="false">Aufgabenblatt03/Aufgabenblatt03.md</guid><pubDate>Tue, 05 Nov 2024 11:17:01 GMT</pubDate></item><item><title><![CDATA[Tutorium Programmieren (Prof. Dr. Ralf Gerlich)]]></title><description><![CDATA[ 
- <br><br><br><br>Leonardo da Pisa (Beiname: "figlio de Bonacci", "Sohn des Bonacci") untersuchte im dreizehnten Jahrhundert das Wachstum einer Kaninchenpopulation.<br>
-Das Ergebnis war die sogenannte <a data-tooltip-position="top" aria-label="https://de.wikipedia.org/wiki/Fibonacci-Folge" rel="noopener nofollow" class="external-link" href="https://de.wikipedia.org/wiki/Fibonacci-Folge" target="_blank">Fibonacci-Folge</a>: 1, 1, 2, 3, 5, 8, 13, ...<br>Die Folge erhält man, indem man die ersten zwei Elemente der Folge auf 1 setzt und die jeweils nachfolgenden Elemente als die Summe Ihrer zwei Vorgänger berechnet: 1, 1, 1+1=2, 1+2=3, 2+3=5, 3+5=8, 5+8=13, ...<br>Das k-te-Element der Folge gibt an, wie Kaninchenpaare im Monat k vorhanden sind, wenn jedes Kaninchenpaar jeden Monat ein weiteres Kaninchenpaar zur Welt bringt, aber die Kaninchen erst nach zwei Monaten geschlechtsreif sind.<br>Unabhängig davon, wie realistisch diese Annahmen sind, hat die Folge eine interessante mathematische Eigenschaft: Der Quotient aus einem Element der Folge und seinem Vorgänger strebt gegen den sogenannten <a data-tooltip-position="top" aria-label="https://de.wikipedia.org/wiki/Goldener_Schnitt" rel="noopener nofollow" class="external-link" href="https://de.wikipedia.org/wiki/Goldener_Schnitt" target="_blank">Goldenen Schnitt</a>: .<br>Überzeugen Sie sich davon, indem Sie die ersten 20 Werte der Fibonacci-Folge berechnen und ausgeben. Geben Sie zusätzlich jeweils den Quotienten der jeweils zwei letzten Wert aus.<br>Die Ausgabe sollte so aussehen:<br>f_3 = 2 2.000000000000000
-f_4 = 3 1.500000000000000
-f_5 = 5 1.666666666666667
-f_6 = 8 1.600000000000000
-f_7 = 13 1.625000000000000
-f_8 = 21 1.615384615384615
-f_9 = 34 1.619047619047619
-f_10 = 55 1.617647058823529
-f_11 = 89 1.618181818181818
-f_12 = 144 1.617977528089888
-f_13 = 233 1.618055555555556
-f_14 = 377 1.618025751072961
-f_15 = 610 1.618037135278515
-f_16 = 987 1.618032786885246
-f_17 = 1597 1.618034447821682
-f_18 = 2584 1.618033813400125
-f_19 = 4181 1.618034055727554
-f_20 = 6765 1.618033963166706
-Copy<br>def fibonacci(x):
-    if (x == 1) or (x == 2):
-        return 1
-    return fibonacci(x - 1) + fibonacci(x - 2)
-
-
-for i in range(3, 24, 1):
-    print(
-        "f_"
-        + str(i)
-        + " = "
-        + str(fibonacci(i))
-        + " "
-        + str(fibonacci(i) / fibonacci(i - 1))
-    )
-
-Copy<br><br>Bubble-Sort ist ein Sortieralgorithmus, bei dem die Einträge in einer Liste so lange paarweise vertauscht werden, bis die Reihenfolge korrekt ist. Stellt man sich die zu sortierende Liste als Säule vor, so kann man sich vorstellen, dass die größten/kleinsten Einträge Schritt für Schritt wie eine Luftblase (engl. "bubble") nach oben steigen.<br>
-<br>Beim Bubble-Sort wird die zu sortierende Liste wiederholt von vorne nach hinten durchlaufen.
-<br>Ist ein Element der Liste größer als sein Nachfolger, so wird dass Element mit seinem Nachfolger vertauscht.
-<br>Dies wird so lange wiederholt, bis kein Tausch mehr erforderlich ist.
-<br>Aufgrund seiner Eigenschaften lässt sich Bubble-Sort als sogenannter In-Place-Sortieralgorithmus implementieren, da statt der Erstellung einer komplett neuen Liste auch die bestehende Liste einfach modifiziert werden kann. Das Ergebnis wird also an der Stelle gespeichert, an dem auch die Eingabe lag ("in place").<br>Implementieren Sie den Bubble-Sort in Python. Der folgende Code kann dafür verwendet werden, eine zufällige Folge von Zahlen zwischen 0 und 999 zu erstellen:<br>import random
-
-
-def bubble_sort(x):
-    while True:
-        possibly_sorted = True
-        for i in range(0, len(x), 1):
-            temp = 0
-            if i &lt; len(x) - 1:
-                if x[i] &gt; x[i + 1]:
-                    possibly_sorted = False
-                    temp = x[i]
-                    x[i] = x[i + 1]
-                    x[i + 1] = temp
-        if possibly_sorted:
-            return x
-
-
-random.seed()
-numbers = [random.randint(0, 999) for i in range(10)]
-print("Unsorted:")
-for i in numbers:
-    print(i)
-print("Sorted:")
-for i in bubble_sort(numbers):
-    print(i)
-
-Copy<br><br>Als Anlage zu diesem Übungsblatt finden Sie die Datei StarTrekTNG.csv aus der Vorlesung, die eine Liste der Episoden der Science-Fiction-Serie "Star Trek: Die nächste Generation" enthält. Hier ein Ausschnitt der Datei:<br>Titel;Staffel;Episode;Disk
-Encounter at Farpoint;1;01/02;1
-The Naked Now;1;03;1
-...
-Copy<br>Schreiben Sie ein Programm, das alle Folgen ausgibt, die ein vom Nutzer oder der Nutzerin vorgegebenes Textfragment im Titel enthalten. Das Programm sollte<br>
-<br>die Datei einlesen,
-<br>Nutzer oder Nutzerin nach einem Titelfragment fragen und
-<br>alle Episoden ausgeben, deren Titel das Fragment enthalten, inklusive Staffel-, Epsioden- und Disk-Nummer.
-<br>Die Felder sollen in geeigneter Weise formatiert werden.<br>Hinweise:<br>
-<br>Staffel- und Disk-Nummern müssen ggf. in Zahlen umgewandelt werden.
-<br>Episoden-Nummern sind nicht immer Zahlen (z.B. "01/02" für Doppelfolgen).
-<br>Nutzen Sie den in-Operator, um auf das Vorhandensein eines Titelfragments zu prüfen.
-<br>Groß- und Kleinschreibung sollen ignoriert werden sein, d.h. die Episode "The Naked Now" sollte auch aufgelistet werden, wenn der Suchstring "naked" (klein geschrieben) lautet. Sie können den Ausdruck s.lower() verwenden, um den String s in Kleinbuchstaben zu verwandeln.
-<br>from dataclasses import dataclass
-
-
-@dataclass
-class Episode:
-    title: str
-    season: int
-    episode_nr: str
-    disk: int
-
-
-file = open("StarTrekTNG.csv", "r")
-episodes = []
-for l in file.readlines()[1::]:
-    e = l.split(";")
-    episodes.append(Episode(e[0], int(e[1]), e[2], int(e[3])))
-
-fragment = input("Nach welcher Folge soll gesucht werden?\n")
-candidates = []
-for e in episodes:
-    if fragment.lower() in e.title.lower():
-        candidates.append(e)
-if candidates == []:
-    print("Es konnten keine passenden Titel gefunden werden!")
-for c in candidates:
-    print(
-        "Titel: "
-        + c.title
-        + "\n"
-        + "Staffel: "
-        + str(c.season)
-        + "\n"
-        + "Folge: "
-        + c.episode_nr
-        + "\n"
-        + "Disk: "
-        + "c.disk"
-        + "\n\n"
-    )
-
-Copy<br><br>Schreiben Sie ein Programm, das eine Liste mit Namen und Telefonnummern verwaltet. Die Liste soll in einer Datei gespeichert werden.<br>Zum Start soll das Programm fragen, ob ein Eintrag hinzugefügt oder gesucht werden soll.<br>Soll ein Eintrag gesucht werden, so soll nach einem Suchtext gefragt werden und alle Einträge ausgegeben werden, deren Namen den Suchtext enthalten. Hier soll Groß- und Kleinschreibung irrelevant sein.<br>Soll ein Eintrag hinzugefügt werden, so soll nach dem Namen und der Telefonnummer gefragt werden. Fügen Sie den neuen Eintrag der Liste von Einträgen hinzu und schreiben Sie die Datenbankdatei neu so, dass alle Einträge inklusive des neuen Eintrags darin enthalten sind.<br>Sie können das Programm mit fiktiven Namen und Telefonnummern testen.<br>from dataclasses import dataclass
-import os.path
-
-
-@dataclass(unsafe_hash=True)
-class Entry:
-    name: str
-    number: str
-
-
-entries = []
-if os.path.isfile("book.db"):
-    book = open("book.db", "r")
-else:
-    book = open("book.db", "x")
-
-for e in book:
-    e = e.split("$")
-    entries.append(Entry(e[0], e[1]))
-book.close()
-
-action = int(
-    input(
-        "Soll ein neuer Eintrag gemacht werden (1) oder nach einer Telefonnummer gesucht werden (2)?\n"
-    )
-)
-match action:
-    case 1:
-        entries.append(Entry(input("Name: \n"), input("Nummer: \n")))
-    case 2:
-        fragment = input("Name:\n")
-        candidates = []
-        for e in entries:
-            if fragment.lower() in e.name.lower():
-                candidates.append(e)
-        if candidates == []:
-            print("Es konnten keine passenden Einträge gefunden werden!")
-        for c in candidates:
-            print("Name: " + c.name + "\n" + "Nummer: " + c.number + "\n\n")
-
-book = open("book.db", "w")
-book.writelines(f"{e.name}${e.number}\n" for e in list(set(entries)))
-
-book.close()
-
-Copy]]></description><link>aufgabenblatt04/aufgabenblatt04.html</link><guid isPermaLink="false">Aufgabenblatt04/Aufgabenblatt04.md</guid><pubDate>Tue, 05 Nov 2024 11:10:41 GMT</pubDate></item><item><title><![CDATA[Tutorium Programmieren (Prof. Dr. Ralf Gerlich)]]></title><description><![CDATA[ 
  <br><br><br><br>Schreiben Sie ein Stück Python-Code, das mit maximal 10 Versuchen eine Zahl zwischen 0 und 1023 (jeweils einschließlich) raten soll. Verwenden Sie dafür Bisektionssuche: Das Programm darf Fragen der Art "Ist die Zahl größer als 125?" stellen.<br>So testen Sie Ihr Programm: Denken Sie sich eine Zahl zwischen 0 und 1023 (jeweils einschließlich) aus und lassen Sie das Programm raten.<br>Optionale Zusatzfrage: Welchen Grund könnte wohl die "krumme" Zahl 1023 haben?<br>def binary_search(region, attempts=1):
     # 0 =&gt; kleiner, 1 =&gt; größer, 2 =&gt; richtig
     match int(
@@ -839,7 +842,7 @@ Copy<br>Path from (1, 1) to (13, 13) found: True
 Path from (1, 13) to (13, 1) found: True
 Path from (1, 1) to (13, 13) found: True
 Path from (1, 13) to (13, 1) found: True
-Copy]]></description><link>aufgabenblatt08/aufgabenblatt08.html</link><guid isPermaLink="false">Aufgabenblatt08/Aufgabenblatt08.md</guid><pubDate>Mon, 04 Nov 2024 07:10:16 GMT</pubDate><enclosure url="data:image/png;base64,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QhkAAABCKAMAAEAIZQAAAAihDAAAACGUAQAAIIQyAAAAhFAGAACAEMoAAAAQQhkAAABCKAMAAEAIZQAAAAihDAAAACGUAQAAIIQyAAAAhFAGAACAEMoAAAAQQhkAAABCKAMAAEAIZQAAAAihDAAAACGUAQAAIIQyAAAAhFAGAACAEMoAAAAQQhkAAABCKAMAAEAIZQAAAAihDAAAACGUAQAAIIQyAAAAhFAGAACAEMoAAAAQQhkAAABCKAMAAEAIZQAAAAihDAAAACGUAQAAIIQyAAAAhFAGAACAEMoAAAAQQhkAAABCKAMAAEAIZQAAAAihDAAAACGUAQAAIIQyAAAAhFAGAACAEMoAAAAQQhkAAABCKAMAAEAIZQAAAAihDAAAACGUAQAAIIQyAAAAhFAGAACAEMoAAAAQQhkAAABCKAMAAEAIZQAAAAihDAAAACGUAQAAIIQyAAAAhFAGAACAEMoAAAAQQhkAAABCKAMAAEAIZQAAAAihDAAAACGUAQAAIIQyAAAAhFAGAACAEMoAAAAQQhkAAABCKAMAAEAIZQAAAAihDAAAACGUAQAAIIQyAAAAhFAGAACAEMoAAAAQQhkAAABCKAMAAEAIZQAAAAihDAAAACGUAQAA4D/L8i+wbvnTjvuctwAAAABJRU5ErkJggg==" length="0" type="false"/><content:encoded>&lt;figure&gt;&lt;img src=&quot;data:image/png;base64,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QhkAAABCKAMAAEAIZQAAAAihDAAAACGUAQAAIIQyAAAAhFAGAACAEMoAAAAQQhkAAABCKAMAAEAIZQAAAAihDAAAACGUAQAAIIQyAAAAhFAGAACAEMoAAAAQQhkAAABCKAMAAEAIZQAAAAihDAAAACGUAQAAIIQyAAAAhFAGAACAEMoAAAAQQhkAAABCKAMAAEAIZQAAAAihDAAAACGUAQAAIIQyAAAAhFAGAACAEMoAAAAQQhkAAABCKAMAAEAIZQAAAAihDAAAACGUAQAAIIQyAAAAhFAGAACAEMoAAAAQQhkAAABCKAMAAEAIZQAAAAihDAAAACGUAQAAIIQyAAAAhFAGAACAEMoAAAAQQhkAAABCKAMAAEAIZQAAAAihDAAAACGUAQAAIIQyAAAAhFAGAACAEMoAAAAQQhkAAABCKAMAAEAIZQAAAAihDAAAACGUAQAAIIQyAAAAhFAGAACAEMoAAAAQQhkAAABCKAMAAEAIZQAAAAihDAAAACGUAQAAIIQyAAAAhFAGAACAEMoAAAAQQhkAAABCKAMAAEAIZQAAAAihDAAAACGUAQAAIIQyAAAAhFAGAACAEMoAAAAQQhkAAABCKAMAAEAIZQAAAAihDAAAACGUAQAA4D/L8i+wbvnTjvuctwAAAABJRU5ErkJggg==&quot;&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[Tutorium Programmieren (Prof. Dr. Ralf Gerlich)]]></title><description><![CDATA[ 
+Copy]]></description><link>aufgabenblatt08/aufgabenblatt08.html</link><guid isPermaLink="false">Aufgabenblatt08/Aufgabenblatt08.md</guid><pubDate>Mon, 04 Nov 2024 07:10:16 GMT</pubDate><enclosure url="data:image/png;base64,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QhkAAABCKAMAAEAIZQAAAAihDAAAACGUAQAAIIQyAAAAhFAGAACAEMoAAAAQQhkAAABCKAMAAEAIZQAAAAihDAAAACGUAQAAIIQyAAAAhFAGAACAEMoAAAAQQhkAAABCKAMAAEAIZQAAAAihDAAAACGUAQAAIIQyAAAAhFAGAACAEMoAAAAQQhkAAABCKAMAAEAIZQAAAAihDAAAACGUAQAAIIQyAAAAhFAGAACAEMoAAAAQQhkAAABCKAMAAEAIZQAAAAihDAAAACGUAQAAIIQyAAAAhFAGAACAEMoAAAAQQhkAAABCKAMAAEAIZQAAAAihDAAAACGUAQAAIIQyAAAAhFAGAACAEMoAAAAQQhkAAABCKAMAAEAIZQAAAAihDAAAACGUAQAAIIQyAAAAhFAGAACAEMoAAAAQQhkAAABCKAMAAEAIZQAAAAihDAAAACGUAQAAIIQyAAAAhFAGAACAEMoAAAAQQhkAAABCKAMAAEAIZQAAAAihDAAAACGUAQAAIIQyAAAAhFAGAACAEMoAAAAQQhkAAABCKAMAAEAIZQAAAAihDAAAACGUAQAAIIQyAAAAhFAGAACAEMoAAAAQQhkAAABCKAMAAEAIZQAAAAihDAAAACGUAQAA4D/L8i+wbvnTjvuctwAAAABJRU5ErkJggg==" length="0" type="false"/><content:encoded>&lt;figure&gt;&lt;img src="data:image/png;base64,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QhkAAABCKAMAAEAIZQAAAAihDAAAACGUAQAAIIQyAAAAhFAGAACAEMoAAAAQQhkAAABCKAMAAEAIZQAAAAihDAAAACGUAQAAIIQyAAAAhFAGAACAEMoAAAAQQhkAAABCKAMAAEAIZQAAAAihDAAAACGUAQAAIIQyAAAAhFAGAACAEMoAAAAQQhkAAABCKAMAAEAIZQAAAAihDAAAACGUAQAAIIQyAAAAhFAGAACAEMoAAAAQQhkAAABCKAMAAEAIZQAAAAihDAAAACGUAQAAIIQyAAAAhFAGAACAEMoAAAAQQhkAAABCKAMAAEAIZQAAAAihDAAAACGUAQAAIIQyAAAAhFAGAACAEMoAAAAQQhkAAABCKAMAAEAIZQAAAAihDAAAACGUAQAAIIQyAAAAhFAGAACAEMoAAAAQQhkAAABCKAMAAEAIZQAAAAihDAAAACGUAQAAIIQyAAAAhFAGAACAEMoAAAAQQhkAAABCKAMAAEAIZQAAAAihDAAAACGUAQAAIIQyAAAAhFAGAACAEMoAAAAQQhkAAABCKAMAAEAIZQAAAAihDAAAACGUAQAAIIQyAAAAhFAGAACAEMoAAAAQQhkAAABCKAMAAEAIZQAAAAihDAAAACGUAQAA4D/L8i+wbvnTjvuctwAAAABJRU5ErkJggg=="&gt;&lt;/figure&gt;</content:encoded></item><item><title><![CDATA[Tutorium Programmieren (Prof. Dr. Ralf Gerlich)]]></title><description><![CDATA[ 
  <br><br><br>Hinweis: Die Lösungen der Aufgaben in diesem Aufgabenblatt werden im folgenden Aufgabenblatt erweitert.<br>Definieren Sie eine Klasse Person und eine Klasse Personendatenbank mit geeigneten Konstruktoren. Die Felder der Objekte dieser Klassen sollen mit der Notation objekt.name usw. lesbar, aber vor Schreibzugriff von außen geschützt sein.<br>Eine Person soll einen Nach- und Vornamen sowie ein Geburtsdatum haben. Implementieren Sie eine Methode __str__, die einen String mit einer gefälligen Darstellung mit Name, Vorname und Geburtsdatum zurückliefert. Für das Datum nutzen Sie die <a data-tooltip-position="top" aria-label="https://docs.python.org/3/library/datetime.html#datetime.date" rel="noopener nofollow" class="external-link" href="https://docs.python.org/3/library/datetime.html#datetime.date" target="_blank">Klasse <code></code> aus der <code></code>-Bibliothek</a>datedatetime.<br>Eine Personendatenbank soll eine Liste von Personen enthalten. Die Liste soll von außen les-, aber nicht schreibbar sein.<br>Über die genannten Felder hinaus können Sie den Objekten zusätzliche Felder hinzufügen, die jedoch von außen nicht les- oder schreibbar sein dürfen.<br>Implementieren Sie für die Personendatenbank die folgenden Methoden:<br>
 <br>leeren: Leert die Liste der Personen.
 <br>einfügen(person): Fügt das Personenobjekt person hinten an die Liste der Personen an. 
