@@ -1,4 +1,4 @@
-<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Programmieren Dokumentation]]></title><description><![CDATA[Obsidian digital garden]]></description><link>http://github.com/dylang/node-rss</link><image><url>lib/media/favicon.png</url><title>Programmieren Dokumentation</title><link/></image><generator>Webpage HTML Export plugin for Obsidian</generator><lastBuildDate>Thu, 14 Nov 2024 14:10:31 GMT</lastBuildDate><atom:link href="lib/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Thu, 14 Nov 2024 14:10:28 GMT</pubDate><ttl>60</ttl><dc:creator/><item><title><![CDATA[Tutorium Programmieren (Prof. Dr. Ralf Gerlich)]]></title><description><![CDATA[ 
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Programmieren Dokumentation]]></title><description><![CDATA[Obsidian digital garden]]></description><link>http://github.com/dylang/node-rss</link><image><url>lib/media/favicon.png</url><title>Programmieren Dokumentation</title><link/></image><generator>Webpage HTML Export plugin for Obsidian</generator><lastBuildDate>Thu, 14 Nov 2024 15:20:00 GMT</lastBuildDate><atom:link href="lib/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Thu, 14 Nov 2024 15:19:59 GMT</pubDate><ttl>60</ttl><dc:creator/><item><title><![CDATA[Tutorium Programmieren (Prof. Dr. Ralf Gerlich)]]></title><description><![CDATA[ 
  <br><br><br><br>Schreiben Sie ein Stück Python-Code, das mit maximal 10 Versuchen eine Zahl zwischen 0 und 1023 (jeweils einschließlich) raten soll. Verwenden Sie dafür Bisektionssuche: Das Programm darf Fragen der Art "Ist die Zahl größer als 125?" stellen.<br>So testen Sie Ihr Programm: Denken Sie sich eine Zahl zwischen 0 und 1023 (jeweils einschließlich) aus und lassen Sie das Programm raten.<br>Optionale Zusatzfrage: Welchen Grund könnte wohl die "krumme" Zahl 1023 haben?<br>def binary_search(region, attempts=1):
     # 0 =&gt; kleiner, 1 =&gt; größer, 2 =&gt; richtig
     match int(
@@ -63,14 +63,16 @@ Nicht-negative Ganzzahl eingeben: 1
 
 Die Binärdarstellung von 1 ist None
 <br><br><br>Die Datei telefonbuch.csv enthält eine Liste von fiktiven Nachnamen, Vornamen und Telefonnummern. Sie ist ähnlich der Datei mit der Star-Trek-Episodenliste aus Aufgabenblatt 4 formatiert. Die Einträge sind aufsteigend nach Nach- und Vorname sortiert.<br>Schreiben Sie ein Programm, das alle Einträge in eine Liste von Tupeln einliest, dann nach einem Nach- und Vornamen fragt und - sofern vorhanden - die zugehörige Telefonnummer ausgibt. Verwenden Sie das Bisektionsverfahren, um den gesuchten Eintrag innerhalb von 10 Vergleichen oder weniger zu finden.<br>def binary_search(region, name):
-    if name.lower() == region[(len(region) - 1) // 2][0].lower():
-        return region[(len(region) - 1) // 2]
+    mid_idx = (len(region) // 2) - 1
+    mid = region[mid_idx]
+    if name.lower() == mid[0].lower():
+        return mid
 
-    if name.lower() &lt; region[(len(region) - 1) // 2][0].lower():
-        return binary_search(region[: (len(region) - 1) // 2 - 1], name)
+    if name.lower() &lt; mid[0].lower():
+        return binary_search(region[: (len(region) - 1) // 2 :], name)
 
-    if name.lower() &gt; region[(len(region) - 1) // 2][0].lower():
-        return binary_search(region[(len(region) + 1) // 2 - 1 : :], name)
+    if name.lower() &gt; mid[0].lower():
+        return binary_search(region[(len(region) - 1) // 2 :], name)
 
 
 entries = []
@@ -85,7 +87,8 @@ fragment = input("Nach welchem Namen suchen sie?\n")
 out = binary_search(entries, fragment)
 print("Name: " + out[0] + " " + out[1] + "\nTelefonnummer: " + out[2])
 
-]]></description><link>aufgabenblatt05/aufgabenblatt05.html</link><guid isPermaLink="false">Aufgabenblatt05/Aufgabenblatt05.md</guid><pubDate>Thu, 14 Nov 2024 14:07:52 GMT</pubDate></item><item><title><![CDATA[Tutorium Programmieren (Prof. Dr. Ralf Gerlich)]]></title><description><![CDATA[ 
+
+]]></description><link>aufgabenblatt05/aufgabenblatt05.html</link><guid isPermaLink="false">Aufgabenblatt05/Aufgabenblatt05.md</guid><pubDate>Thu, 14 Nov 2024 15:19:23 GMT</pubDate></item><item><title><![CDATA[Tutorium Programmieren (Prof. Dr. Ralf Gerlich)]]></title><description><![CDATA[ 
  <br><br><br><br>Leonardo da Pisa (Beiname: "figlio de Bonacci", "Sohn des Bonacci") untersuchte im dreizehnten Jahrhundert das Wachstum einer Kaninchenpopulation.<br>
 Das Ergebnis war die sogenannte <a data-tooltip-position="top" aria-label="https://de.wikipedia.org/wiki/Fibonacci-Folge" rel="noopener nofollow" class="external-link" href="https://de.wikipedia.org/wiki/Fibonacci-Folge" target="_blank">Fibonacci-Folge</a>: 1, 1, 2, 3, 5, 8, 13, ...<br>Die Folge erhält man, indem man die ersten zwei Elemente der Folge auf 1 setzt und die jeweils nachfolgenden Elemente als die Summe Ihrer zwei Vorgänger berechnet: 1, 1, 1+1=2, 1+2=3, 2+3=5, 3+5=8, 5+8=13, ...<br>Das k-te-Element der Folge gibt an, wie Kaninchenpaare im Monat k vorhanden sind, wenn jedes Kaninchenpaar jeden Monat ein weiteres Kaninchenpaar zur Welt bringt, aber die Kaninchen erst nach zwei Monaten geschlechtsreif sind.<br>Unabhängig davon, wie realistisch diese Annahmen sind, hat die Folge eine interessante mathematische Eigenschaft: Der Quotient aus einem Element der Folge und seinem Vorgänger strebt gegen den sogenannten <a data-tooltip-position="top" aria-label="https://de.wikipedia.org/wiki/Goldener_Schnitt" rel="noopener nofollow" class="external-link" href="https://de.wikipedia.org/wiki/Goldener_Schnitt" target="_blank">Goldenen Schnitt</a>: .<br>Überzeugen Sie sich davon, indem Sie die ersten 20 Werte der Fibonacci-Folge berechnen und ausgeben. Geben Sie zusätzlich jeweils den Quotienten der jeweils zwei letzten Wert aus.<br>Die Ausgabe sollte so aussehen:<br>f_3 = 2 2.000000000000000
 f_4 = 3 1.500000000000000
