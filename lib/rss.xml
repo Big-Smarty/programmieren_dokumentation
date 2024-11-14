@@ -1,4 +1,91 @@
-<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Programmieren Dokumentation]]></title><description><![CDATA[Obsidian digital garden]]></description><link>http://github.com/dylang/node-rss</link><image><url>lib/media/favicon.png</url><title>Programmieren Dokumentation</title><link/></image><generator>Webpage HTML Export plugin for Obsidian</generator><lastBuildDate>Thu, 07 Nov 2024 13:38:45 GMT</lastBuildDate><atom:link href="lib/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Thu, 07 Nov 2024 13:38:42 GMT</pubDate><ttl>60</ttl><dc:creator/><item><title><![CDATA[Tutorium Programmieren (Prof. Dr. Ralf Gerlich)]]></title><description><![CDATA[ 
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel><title><![CDATA[Programmieren Dokumentation]]></title><description><![CDATA[Obsidian digital garden]]></description><link>http://github.com/dylang/node-rss</link><image><url>lib/media/favicon.png</url><title>Programmieren Dokumentation</title><link/></image><generator>Webpage HTML Export plugin for Obsidian</generator><lastBuildDate>Thu, 14 Nov 2024 14:10:31 GMT</lastBuildDate><atom:link href="lib/rss.xml" rel="self" type="application/rss+xml"/><pubDate>Thu, 14 Nov 2024 14:10:28 GMT</pubDate><ttl>60</ttl><dc:creator/><item><title><![CDATA[Tutorium Programmieren (Prof. Dr. Ralf Gerlich)]]></title><description><![CDATA[ 
+ <br><br><br><br>Schreiben Sie ein Stück Python-Code, das mit maximal 10 Versuchen eine Zahl zwischen 0 und 1023 (jeweils einschließlich) raten soll. Verwenden Sie dafür Bisektionssuche: Das Programm darf Fragen der Art "Ist die Zahl größer als 125?" stellen.<br>So testen Sie Ihr Programm: Denken Sie sich eine Zahl zwischen 0 und 1023 (jeweils einschließlich) aus und lassen Sie das Programm raten.<br>Optionale Zusatzfrage: Welchen Grund könnte wohl die "krumme" Zahl 1023 haben?<br>def binary_search(region, attempts=1):
+    # 0 =&gt; kleiner, 1 =&gt; größer, 2 =&gt; richtig
+    match int(
+        input(
+            "Ist es "
+            + str((region[0] + region[1]) // 2)
+            + "? (0 =&gt; kleiner, 1 =&gt; größer, 2 =&gt; richtig)\n"
+        )
+    ):
+        case 0:
+            return binary_search(
+                (region[0], (region[0] + region[1]) // 2), attempts + 1
+            )
+        case 1:
+            return binary_search(
+                ((region[0] + region[1]) // 2, region[1]), attempts + 1
+            )
+        case 2:
+            print(
+                str((region[0] + region[1]) // 2)
+                + " nach "
+                + str(attempts)
+                + " Versuch(en) gefunden\n"
+            )
+            return (region[0] + region[1]) // 2
+
+
+binary_search((0, 1023))
+
+<br>1023 ist die größte Zahl, welche sich mit 10 Bits darstellen lässt. Binary Search ist ein Algorithmus mit logarithmischer Komplexität, also kann es in maximal 2^n Versuchen das richtige aus n Elementen finden. In der Aufgabe sind maximal 10 Versuche beschrieben, also darf man, um die maximale Anzahl von Elementen nicht zu überschreiten, maximal 2^10 Elemente benutzen, in diesem Fall alles von 0 bis 2^10-1<br><br>Schreiben Sie ein Programm, das zwei Kommazahlen p und q einliest und die beiden Lösungen der Quadratischen Gleichung  ausgibt. Diese Lösungen können Sie mit der sogenannten p-q-Formel berechnen: <br>Falls keine reelle Lösung existiert (), soll statt der Lösungen eine entsprechende Meldung ausgegeben werden.<br>Hinweis: In der untenstehenden Zelle können Sie den Ausdruck sqrt(x) zur Berechnung der Wurzel von x verwenden.<br>Geben Sie zusätzlich auch die Werte von  für  und  aus.<br>Probieren Sie das Programm mit den Werten 1 für p und 1E-16 für q aus. Können Sie sich das Ergebnis erklären?<br>from math import sqrt
+
+q = float(input("q: "))
+p = float(input("p: "))
+
+if pow(p / 2, 2) &lt; 2:
+    print("Fehler: Keine reelle Lösung!")
+else:
+    x1 = -(p / 2) + sqrt(pow(p / 2, 2) - q)
+    x2 = -(p / 2) - sqrt(pow(p / 2, 2) - q)
+    print("x1: " + str(x1) + "\nx2: " + str(x2))
+    print("x1²+px1+q = " + str(pow(x1, 2) + p * x1 + q))
+    print("x2²+px2+q = " + str(pow(x2, 2) + p * x2 + q))
+
+<br><br>Implementieren Sie eine Funktion to_bin, die für eine nicht-negative ganze Zahl deren kürzestmögliche Binärdarstellung als String zurückliefert. Zur Berechnung der Binärdarstellung dürfen Sie keine Bibliotheksfunktionen verwenden!<br>Testen Sie die Funktion mit dem vorgegebenen Testprogramm.<br>def to_bin(zahl):
+    def to_bin(x):
+        if x == 0:
+            return "0"
+        return str(x % 2) + to_bin(x // 2)
+
+
+print(to_bin(int(input("Welche Zahl soll konvertiert werden?\n")))[::-1])
+
+
+while True:
+    zahl = int(input("Nicht-negative Ganzzahl eingeben:"))
+    if zahl &gt;= 0:
+        print(f"Die Binärdarstellung von {zahl} ist {to_bin(zahl)}")
+        break
+<br>Nicht-negative Ganzzahl eingeben: -2
+Nicht-negative Ganzzahl eingeben: 1
+
+
+Die Binärdarstellung von 1 ist None
+<br><br><br>Die Datei telefonbuch.csv enthält eine Liste von fiktiven Nachnamen, Vornamen und Telefonnummern. Sie ist ähnlich der Datei mit der Star-Trek-Episodenliste aus Aufgabenblatt 4 formatiert. Die Einträge sind aufsteigend nach Nach- und Vorname sortiert.<br>Schreiben Sie ein Programm, das alle Einträge in eine Liste von Tupeln einliest, dann nach einem Nach- und Vornamen fragt und - sofern vorhanden - die zugehörige Telefonnummer ausgibt. Verwenden Sie das Bisektionsverfahren, um den gesuchten Eintrag innerhalb von 10 Vergleichen oder weniger zu finden.<br>def binary_search(region, name):
+    if name.lower() == region[(len(region) - 1) // 2][0].lower():
+        return region[(len(region) - 1) // 2]
+
+    if name.lower() &lt; region[(len(region) - 1) // 2][0].lower():
+        return binary_search(region[: (len(region) - 1) // 2 - 1], name)
+
+    if name.lower() &gt; region[(len(region) - 1) // 2][0].lower():
+        return binary_search(region[(len(region) + 1) // 2 - 1 : :], name)
+
+
+entries = []
+book = open("telefonbuch.csv", "r")
+for l in book.readlines()[1::]:
+    temp = l.split(";")
+    if temp == ["\n"]:
+        continue
+    entries.append((temp[0], temp[1], temp[2]))
+
+fragment = input("Nach welchem Namen suchen sie?\n")
+out = binary_search(entries, fragment)
+print("Name: " + out[0] + " " + out[1] + "\nTelefonnummer: " + out[2])
+
+]]></description><link>aufgabenblatt05/aufgabenblatt05.html</link><guid isPermaLink="false">Aufgabenblatt05/Aufgabenblatt05.md</guid><pubDate>Thu, 14 Nov 2024 14:07:52 GMT</pubDate></item><item><title><![CDATA[Tutorium Programmieren (Prof. Dr. Ralf Gerlich)]]></title><description><![CDATA[ 
  <br><br><br><br>Leonardo da Pisa (Beiname: "figlio de Bonacci", "Sohn des Bonacci") untersuchte im dreizehnten Jahrhundert das Wachstum einer Kaninchenpopulation.<br>
 Das Ergebnis war die sogenannte <a data-tooltip-position="top" aria-label="https://de.wikipedia.org/wiki/Fibonacci-Folge" rel="noopener nofollow" class="external-link" href="https://de.wikipedia.org/wiki/Fibonacci-Folge" target="_blank">Fibonacci-Folge</a>: 1, 1, 2, 3, 5, 8, 13, ...<br>Die Folge erhält man, indem man die ersten zwei Elemente der Folge auf 1 setzt und die jeweils nachfolgenden Elemente als die Summe Ihrer zwei Vorgänger berechnet: 1, 1, 1+1=2, 1+2=3, 2+3=5, 3+5=8, 5+8=13, ...<br>Das k-te-Element der Folge gibt an, wie Kaninchenpaare im Monat k vorhanden sind, wenn jedes Kaninchenpaar jeden Monat ein weiteres Kaninchenpaar zur Welt bringt, aber die Kaninchen erst nach zwei Monaten geschlechtsreif sind.<br>Unabhängig davon, wie realistisch diese Annahmen sind, hat die Folge eine interessante mathematische Eigenschaft: Der Quotient aus einem Element der Folge und seinem Vorgänger strebt gegen den sogenannten <a data-tooltip-position="top" aria-label="https://de.wikipedia.org/wiki/Goldener_Schnitt" rel="noopener nofollow" class="external-link" href="https://de.wikipedia.org/wiki/Goldener_Schnitt" target="_blank">Goldenen Schnitt</a>: .<br>Überzeugen Sie sich davon, indem Sie die ersten 20 Werte der Fibonacci-Folge berechnen und ausgeben. Geben Sie zusätzlich jeweils den Quotienten der jeweils zwei letzten Wert aus.<br>Die Ausgabe sollte so aussehen:<br>f_3 = 2 2.000000000000000
 f_4 = 3 1.500000000000000
@@ -282,89 +369,6 @@ if validate_code(code):
 else:
     print("Dieser Code ist nicht valide")
 Copy]]></description><link>aufgabenblatt03/aufgabenblatt03.html</link><guid isPermaLink="false">Aufgabenblatt03/Aufgabenblatt03.md</guid><pubDate>Tue, 05 Nov 2024 11:17:01 GMT</pubDate></item><item><title><![CDATA[Tutorium Programmieren (Prof. Dr. Ralf Gerlich)]]></title><description><![CDATA[ 
- <br><br><br><br>Schreiben Sie ein Stück Python-Code, das mit maximal 10 Versuchen eine Zahl zwischen 0 und 1023 (jeweils einschließlich) raten soll. Verwenden Sie dafür Bisektionssuche: Das Programm darf Fragen der Art "Ist die Zahl größer als 125?" stellen.<br>So testen Sie Ihr Programm: Denken Sie sich eine Zahl zwischen 0 und 1023 (jeweils einschließlich) aus und lassen Sie das Programm raten.<br>Optionale Zusatzfrage: Welchen Grund könnte wohl die "krumme" Zahl 1023 haben?<br>def binary_search(region, attempts=1):
-    # 0 =&gt; kleiner, 1 =&gt; größer, 2 =&gt; richtig
-    match int(
-        input(
-            "Ist es "
-            + str(region[(len(region) - 1) // 2])
-            + "? (0 =&gt; kleiner, 1 =&gt; größer, 2 =&gt; richtig)\n"
-        )
-    ):
-        case 0:
-            return binary_search(region[: (len(region) - 1) // 2 - 1], attempts + 1)
-        case 1:
-            return binary_search(region[(len(region) - 1) // 2 + 1 : :], attempts + 1)
-        case 2:
-            print(
-                str(region[(len(region) - 1) // 2])
-                + " nach "
-                + str(attempts)
-                + " Versuch(en) gefunden\n"
-            )
-            return region[(len(region) - 1) // 2]
-
-
-binary_search(range(0, 1024, 1))
-
-Copy<br>1023 ist die größte Zahl, welche sich mit 10 Bits darstellen lässt. Binary Search ist ein Algorithmus mit logarithmischer Komplexität, also kann es in maximal 2^n Versuchen das richtige aus n Elementen finden. In der Aufgabe sind maximal 10 Versuche beschrieben, also darf man, um die maximale Anzahl von Elementen nicht zu überschreiten, maximal 2^10 Elemente benutzen, in diesem Fall alles von 0 bis 2^10-1<br><br>Schreiben Sie ein Programm, das zwei Kommazahlen p und q einliest und die beiden Lösungen der Quadratischen Gleichung  ausgibt. Diese Lösungen können Sie mit der sogenannten p-q-Formel berechnen: <br>Falls keine reelle Lösung existiert (), soll statt der Lösungen eine entsprechende Meldung ausgegeben werden.<br>Hinweis: In der untenstehenden Zelle können Sie den Ausdruck sqrt(x) zur Berechnung der Wurzel von x verwenden.<br>Geben Sie zusätzlich auch die Werte von  für  und  aus.<br>Probieren Sie das Programm mit den Werten 1 für p und 1E-16 für q aus. Können Sie sich das Ergebnis erklären?<br>from math import sqrt
-
-q = float(input("q: "))
-p = float(input("p: "))
-
-if pow(p / 2, 2) &lt; 2:
-    print("Fehler: Keine reelle Lösung!")
-else:
-    x1 = -(p / 2) + sqrt(pow(p / 2, 2) - q)
-    x2 = -(p / 2) - sqrt(pow(p / 2, 2) - q)
-    print("x1: " + str(x1) + "\nx2: " + str(x2))
-    print("x1²+px1+q = " + str(pow(x1, 2) + p * x1 + q))
-    print("x2²+px2+q = " + str(pow(x2, 2) + p * x2 + q))
-
-Copy<br><br>Implementieren Sie eine Funktion to_bin, die für eine nicht-negative ganze Zahl deren kürzestmögliche Binärdarstellung als String zurückliefert. Zur Berechnung der Binärdarstellung dürfen Sie keine Bibliotheksfunktionen verwenden!<br>Testen Sie die Funktion mit dem vorgegebenen Testprogramm.<br>def to_bin(zahl):
-    def to_bin(x):
-        if x == 0:
-            return "0"
-        return str(x % 2) + to_bin(x // 2)
-
-
-print(to_bin(int(input("Welche Zahl soll konvertiert werden?\n")))[::-1])
-
-
-while True:
-    zahl = int(input("Nicht-negative Ganzzahl eingeben:"))
-    if zahl &gt;= 0:
-        print(f"Die Binärdarstellung von {zahl} ist {to_bin(zahl)}")
-        break
-Copy<br>Nicht-negative Ganzzahl eingeben: -2
-Nicht-negative Ganzzahl eingeben: 1
-
-
-Die Binärdarstellung von 1 ist None
-Copy<br>Copy<br><br>Die Datei telefonbuch.csv enthält eine Liste von fiktiven Nachnamen, Vornamen und Telefonnummern. Sie ist ähnlich der Datei mit der Star-Trek-Episodenliste aus Aufgabenblatt 4 formatiert. Die Einträge sind aufsteigend nach Nach- und Vorname sortiert.<br>Schreiben Sie ein Programm, das alle Einträge in eine Liste von Tupeln einliest, dann nach einem Nach- und Vornamen fragt und - sofern vorhanden - die zugehörige Telefonnummer ausgibt. Verwenden Sie das Bisektionsverfahren, um den gesuchten Eintrag innerhalb von 10 Vergleichen oder weniger zu finden.<br>def binary_search(region, name):
-    if name.lower() == region[(len(region) - 1) // 2][0].lower():
-        return region[(len(region) - 1) // 2]
-
-    if name.lower() &lt; region[(len(region) - 1) // 2][0].lower():
-        return binary_search(region[: (len(region) - 1) // 2 - 1], name)
-
-    if name.lower() &gt; region[(len(region) - 1) // 2][0].lower():
-        return binary_search(region[(len(region) + 1) // 2 - 1 : :], name)
-
-
-entries = []
-book = open("telefonbuch.csv", "r")
-for l in book.readlines()[1::]:
-    temp = l.split(";")
-    if temp == ["\n"]:
-        continue
-    entries.append((temp[0], temp[1], temp[2]))
-
-fragment = input("Nach welchem Namen suchen sie?\n")
-out = binary_search(entries, fragment)
-print("Name: " + out[0] + " " + out[1] + "\nTelefonnummer: " + out[2])
-
-Copy]]></description><link>aufgabenblatt05/aufgabenblatt05.html</link><guid isPermaLink="false">Aufgabenblatt05/Aufgabenblatt05.md</guid><pubDate>Mon, 04 Nov 2024 07:10:14 GMT</pubDate></item><item><title><![CDATA[Tutorium Programmieren (Prof. Dr. Ralf Gerlich)]]></title><description><![CDATA[ 
  <br><br><br><br>In der Statistik werden häufig sogenannte Zentrale Tendenzmaße wie Mittelwert oder Median berechnet.<br>Implementieren Sie ein Stück Code, das eine Liste mit 1000 Zufallszahlen füllt und dann den Median und den Mittelwert berechnet. Nutzen Sie für die Erzeugung einer Zufallszahl die Funktion randint aus dem random-Modul und für die Berechnung von Mittelwert und Median entsprechende Funktionen aus dem Modul statistics.<br>Die Liste der vorhandenen Module finden Sie unter "Library Reference" in der <a data-tooltip-position="top" aria-label="https://docs.python.org" rel="noopener nofollow" class="external-link" href="https://docs.python.org" target="_blank">Standard-Python-Dokumentation</a>.<br>from random import randint
 import statistics
 
