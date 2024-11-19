@@ -3,7 +3,10 @@ from math import sqrt
 q = float(input("q: "))
 p = float(input("p: "))
 
-if pow(p / 2, 2) < 2:
+print(pow(p / 2, 2) - q)
+
+
+if pow(p / 2, 2) - q < 0:
     print("Fehler: Keine reelle Lösung!")
 else:
     x1 = -(p / 2) + sqrt(pow(p / 2, 2) - q)
